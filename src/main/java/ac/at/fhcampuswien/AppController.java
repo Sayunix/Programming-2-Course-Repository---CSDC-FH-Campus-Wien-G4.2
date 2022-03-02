@@ -7,7 +7,8 @@ public class AppController {
     private List<Article> articles;
 
     public AppController() {
-        articles = new ArrayList<Article>();
+        //articles = new ArrayList<Article>();
+        articles = generateMockList();
     }
 
     public void setArticles(List<Article> articles) {
@@ -42,5 +43,16 @@ public class AppController {
             }
         }
         return  filteredList;
+    }
+
+    private List<Article> generateMockList(){
+        Article a1 = new Article("New York Times", "Eric Adams, a Bitcoin Booster, Is Taking First Paycheck in Crypto");
+        articles.add(a1);
+        Article a2 = new Article("News Sky", "Irishman held against his will in China for 3 years reunited with 'unbelievably happy' family");
+        articles.add(a2);
+        Article a3 = new Article("News Sky", "Mother who won £127,000 tells how she still ended up homeless");
+        articles.add(a3);
+
+        return articles;
     }
 }
