@@ -9,8 +9,8 @@ public class Menu {
 //    (INVALID_USER_INPUT_MESSAGE) und den Verabschiedungstext (EXIT_MESSAGE).
 
     AppController controller = new AppController();
-    String INVALID_USER_INPUT_MESSAGE = new String();
-    String EXIT_MESSAGE = new String();
+    String INVALID_USER_INPUT_MESSAGE = "Invalid Input!";
+    String EXIT_MESSAGE = "Goodbye Pal, have a nice day";
 
     public void start() {
 
