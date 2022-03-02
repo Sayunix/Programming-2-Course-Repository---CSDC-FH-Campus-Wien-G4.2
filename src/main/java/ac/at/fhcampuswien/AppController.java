@@ -7,7 +7,7 @@ public class AppController {
     private List<Article> articles;
 
     public AppController() {
-        //articles = new ArrayList<Article>();
+        articles = new ArrayList<Article>();
         articles = generateMockList();
     }
 
