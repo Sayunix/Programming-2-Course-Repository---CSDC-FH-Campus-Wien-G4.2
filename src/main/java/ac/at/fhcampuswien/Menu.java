@@ -84,7 +84,7 @@ public class Menu {
 
         System.out.println("*****************************\n" +
                 "*  Welcome to NewsApp  *\n" +
-                "*****************************\n");
+                "*****************************");
         System.out.println("Enter what you want to do\n" +
                 "a: Get top headlines austria\n" +
                 "b: Get all news about bitcoin\n" +
