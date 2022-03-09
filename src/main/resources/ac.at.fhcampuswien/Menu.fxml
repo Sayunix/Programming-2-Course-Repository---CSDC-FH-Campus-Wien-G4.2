@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="535.0" prefWidth="883.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ac.at.fhcampuswien.Menu">
+   <children>
+      <Button layoutX="557.0" layoutY="56.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="88.0" text="Quit" />
+   </children>
+</AnchorPane>
