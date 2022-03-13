@@ -19,8 +19,7 @@ public class AppControllerTest {
      void setup(){
         articles = new ArrayList<>();
         empty = new ArrayList<>();
-//        actual = new ArrayList<>();
-//        expected = new ArrayList<>();
+
     }
 
     @Test
@@ -123,6 +122,8 @@ public class AppControllerTest {
 
         assertEquals(expected,actual);
     }
+
+    // programme doesn't differentiate lower and uppercase in title but does in query.
     @Test
     public void filterList3(){
         Article a1 = new Article("Fabian Schneider","The future of Irish football.");
