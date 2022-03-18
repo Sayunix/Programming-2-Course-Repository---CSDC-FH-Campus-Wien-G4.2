@@ -2,6 +2,7 @@ package ac.at.fhcampuswien;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class AppController {
     private List<Article> articles;
@@ -37,8 +38,9 @@ public class AppController {
 
     protected List<Article> filterList(String query, List<Article> articles) {
         List<Article> filteredList = new ArrayList<Article>();
+
         for (int i = 0; i < articles.size(); i++) {
-            if (articles.get(i).toString().toLowerCase().contains(query)) {
+            if (articles.get(i).toString().toLowerCase().contains(query.toLowerCase())) {
                 filteredList.add(articles.get(i));
             }
         }

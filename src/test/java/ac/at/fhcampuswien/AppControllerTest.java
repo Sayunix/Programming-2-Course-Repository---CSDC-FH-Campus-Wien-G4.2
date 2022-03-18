@@ -2,6 +2,7 @@ package ac.at.fhcampuswien;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.AnnotatedType;
@@ -12,17 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppControllerTest {
     private AppController ac = new AppController();
-    private static List<Article> articles;
-    private static List<Article> empty;
+    private List<Article> articles;
 
     @BeforeEach
      void setup(){
         articles = new ArrayList<>();
-        empty = new ArrayList<>();
-
     }
 
     @Test
+    //@DisplayName("tests set article method")
     public void setArticles(){
         Article a1 = new Article("Fabian Schneider","The future of Irish football.");
         articles.add(a1);
@@ -49,7 +48,7 @@ public class AppControllerTest {
     }
     @Test
     public void getArticleCount_empty(){
-        ac.setArticles(empty);
+        ac.setArticles(articles);
 
         int actual = ac.getArticleCount();
         int expected = 0;
@@ -123,7 +122,6 @@ public class AppControllerTest {
         assertEquals(expected,actual);
     }
 
-    // programme doesn't differentiate lower and uppercase in title but does in query.
     @Test
     public void filterList3(){
         Article a1 = new Article("Fabian Schneider","The future of Irish football.");
@@ -135,19 +133,6 @@ public class AppControllerTest {
         List<Article> actual= ac.filterList("Doge", articles);
         articles.remove(a1);
         List<Article> expected = articles;
-
-        assertEquals(expected,actual);
-    }
-    @Test
-    public void filterList4(){
-        Article a1 = new Article("Fabian Schneider","The future of Irish football.");
-        articles.add(a1);
-        Article a2 = new Article("Wolfgang A. Mozart","How dogecoin revived me from the dead!");
-        articles.add(a2);
-        ac.setArticles(articles);
-
-        List<Article> actual= ac.filterList("Mozart", articles);
-        List<Article> expected = new ArrayList<>();
 
         assertEquals(expected,actual);
     }
