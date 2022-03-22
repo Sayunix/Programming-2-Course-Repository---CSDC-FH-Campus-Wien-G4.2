@@ -14,18 +14,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AppControllerTest {
     private AppController ac = new AppController();
     private List<Article> articles;
+    private Article a1;
+    private Article a2;
 
     @BeforeEach
      void setup(){
         articles = new ArrayList<>();
+        a1 = new Article();
+        a2 = new Article();
     }
 
     @Test
     //@DisplayName("tests set article method")
     public void setArticles(){
-        Article a1 = new Article("Fabian Schneider","The future of Irish football.");
+        a1.setAuthor("Mr Test");
+        a1.setTitle("The future of testing.");
         articles.add(a1);
-        Article a2 = new Article("Wolfgang A. Mozart","How bitcoin revived me from the dead!");
+        a2.setAuthor("Wolfgang A. Mozart");
+        a2.setTitle("How bitcoin revived me from the dead!");
         articles.add(a2);
 
         ac.setArticles(articles);
@@ -35,10 +41,13 @@ public class AppControllerTest {
     }
     @Test
     public void getArticleCount(){
-        Article a1 = new Article("Fabian Schneider","The future of Irish football.");
+        a1.setAuthor("Mr Test");
+        a1.setTitle("The future of testing.");
         articles.add(a1);
-        Article a2 = new Article("Wolfgang A. Mozart","How bitcoin revived me from the dead!");
+        a2.setAuthor("Wolfgang A. Mozart");
+        a2.setTitle("How bitcoin revived me from the dead!");
         articles.add(a2);
+
         ac.setArticles(articles);
 
         int actual = ac.getArticleCount();
@@ -57,21 +66,25 @@ public class AppControllerTest {
     }
     @Test
     public void getTopHeadlinesAustria(){
-        Article a1 = new Article("Fabian Schneider","The future of Irish football.");
+        a1.setAuthor("Mr Test");
+        a1.setTitle("The future of testing.");
         articles.add(a1);
-        Article a2 = new Article("Wolfgang A. Mozart","How bitcoin revived me from the dead!");
+        a2.setAuthor("Wolfgang A. Mozart");
+        a2.setTitle("How bitcoin revived me from the dead!");
         articles.add(a2);
-        ac.setArticles(articles);
 
+        ac.setArticles(articles);
         List<Article> expected = articles;
 
         assertEquals(expected, ac.getTopHeadlinesAustria());
     }
     @Test
     public void getAllNewsBitcoin(){
-        Article a1 = new Article("Fabian Schneider","The future of Irish football.");
+        a1.setAuthor("Mr Test");
+        a1.setTitle("The future of testing.");
         articles.add(a1);
-        Article a2 = new Article("Wolfgang A. Mozart","How bitcoin revived me from the dead!");
+        a2.setAuthor("Wolfgang A. Mozart");
+        a2.setTitle("How bitcoin revived me from the dead!");
         articles.add(a2);
 
         ac.setArticles(articles);
@@ -83,10 +96,11 @@ public class AppControllerTest {
     }
     @Test
     public void noBitcoinNews(){
-        Article a1 = new Article("Fabian Schneider","The future of Irish football.");
+        a1.setAuthor("Mr Test");
+        a1.setTitle("The future of testing.");
         articles.add(a1);
-        Article a2 = new Article("Wolfgang A. Mozart","How Dogecoin revived me from the dead!");
-        articles.add(a2);
+        a2.setAuthor("Wolfgang A. Mozart");
+        a2.setTitle("How Dogecoin revived me from the dead!");
 
         ac.setArticles(articles);
         List<Article> actual = ac.getAllNewsBitcoin();
@@ -96,12 +110,13 @@ public class AppControllerTest {
     }
     @Test
     public void filterList1(){
-        Article a1 = new Article("Fabian Schneider","The future of Irish football.");
+        a1.setAuthor("Mr Test");
+        a1.setTitle("The future of testing.");
         articles.add(a1);
-        Article a2 = new Article("Wolfgang A. Mozart","How Dogecoin revived me from the dead!");
-        articles.add(a2);
-        ac.setArticles(articles);
+        a2.setAuthor("Wolfgang A. Mozart");
+        a2.setTitle("How Dogecoin revived me from the dead!");
 
+        ac.setArticles(articles);
         List<Article> actual= ac.filterList("the", articles);
         List<Article> expected = articles;
 
@@ -109,12 +124,13 @@ public class AppControllerTest {
     }
     @Test
     public void filterList2(){
-        Article a1 = new Article("Fabian Schneider","The future of Irish football.");
+        a1.setAuthor("Mr Test");
+        a1.setTitle("The future of testing.");
         articles.add(a1);
-        Article a2 = new Article("Wolfgang A. Mozart","How Dogecoin revived me from the dead!");
-        articles.add(a2);
-        ac.setArticles(articles);
+        a2.setAuthor("Wolfgang A. Mozart");
+        a2.setTitle("How Dogecoin revived me from the dead!");
 
+        ac.setArticles(articles);
         List<Article> actual= ac.filterList("me", articles);
         articles.remove(a1);
         List<Article> expected = articles;
@@ -124,12 +140,13 @@ public class AppControllerTest {
 
     @Test
     public void filterList3(){
-        Article a1 = new Article("Fabian Schneider","The future of Irish football.");
+        a1.setAuthor("Mr Test");
+        a1.setTitle("The future of testing.");
         articles.add(a1);
-        Article a2 = new Article("Wolfgang A. Mozart","How dogecoin revived me from the dead!");
-        articles.add(a2);
-        ac.setArticles(articles);
+        a2.setAuthor("Wolfgang A. Mozart");
+        a2.setTitle("How dogecoin revived me from the dead!");
 
+        ac.setArticles(articles);
         List<Article> actual= ac.filterList("Doge", articles);
         articles.remove(a1);
         List<Article> expected = articles;
