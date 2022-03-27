@@ -26,6 +26,7 @@ public class AppControllerTest {
 
     @Test
     //@DisplayName("tests set article method")
+    // checks if setter works
     public void setArticles(){
         a1.setAuthor("Mr Test");
         a1.setTitle("The future of testing.");
@@ -40,6 +41,7 @@ public class AppControllerTest {
         assertEquals(articles,actual);
     }
     @Test
+    //checks if the method getArticleCount returns the right value of number of articles in list
     public void getArticleCount(){
         a1.setAuthor("Mr Test");
         a1.setTitle("The future of testing.");
@@ -56,6 +58,7 @@ public class AppControllerTest {
         assertEquals(expected,actual);
     }
     @Test
+    //checks if the method getArticleCount returns zero if the list is empty
     public void getArticleCount_empty(){
         ac.setArticles(articles);
 
@@ -65,6 +68,7 @@ public class AppControllerTest {
         assertEquals(expected,actual);
     }
     @Test
+    // checks if the getTopHeadlinesAustria method returns the right list of articles
     public void getTopHeadlinesAustria(){
         a1.setAuthor("Mr Test");
         a1.setTitle("The future of testing.");
@@ -79,6 +83,7 @@ public class AppControllerTest {
         assertEquals(expected, ac.getTopHeadlinesAustria());
     }
     @Test
+    // tests if the getAllNewsBitcoin method returns a list that only contains articles with the word "bitcoin" in it
     public void getAllNewsBitcoin(){
         a1.setAuthor("Mr Test");
         a1.setTitle("The future of testing.");
@@ -95,12 +100,15 @@ public class AppControllerTest {
         assertEquals(expected,ac.getAllNewsBitcoin());
     }
     @Test
+    //tests if it returns an empty list if the list does not contain articles with "bitcoin" in it
     public void noBitcoinNews(){
         a1.setAuthor("Mr Test");
         a1.setTitle("The future of testing.");
         articles.add(a1);
         a2.setAuthor("Wolfgang A. Mozart");
         a2.setTitle("How Dogecoin revived me from the dead!");
+        articles.add(a2);
+
 
         ac.setArticles(articles);
         List<Article> actual = ac.getAllNewsBitcoin();
@@ -109,26 +117,14 @@ public class AppControllerTest {
         assertEquals(expected,actual);
     }
     @Test
+    //checks if the filterList methods returns a list with only articles that contain the word that is past as query
     public void filterList1(){
         a1.setAuthor("Mr Test");
         a1.setTitle("The future of testing.");
         articles.add(a1);
         a2.setAuthor("Wolfgang A. Mozart");
         a2.setTitle("How Dogecoin revived me from the dead!");
-
-        ac.setArticles(articles);
-        List<Article> actual= ac.filterList("the", articles);
-        List<Article> expected = articles;
-
-        assertEquals(expected,actual);
-    }
-    @Test
-    public void filterList2(){
-        a1.setAuthor("Mr Test");
-        a1.setTitle("The future of testing.");
-        articles.add(a1);
-        a2.setAuthor("Wolfgang A. Mozart");
-        a2.setTitle("How Dogecoin revived me from the dead!");
+        articles.add(a2);
 
         ac.setArticles(articles);
         List<Article> actual= ac.filterList("me", articles);
@@ -137,17 +133,52 @@ public class AppControllerTest {
 
         assertEquals(expected,actual);
     }
-
     @Test
+    // checks if the method also uses the author for filtering
+    public void filterList2(){
+        a1.setAuthor("Mr Test");
+        a1.setTitle("The future of testing.");
+        articles.add(a1);
+        a2.setAuthor("Wolfgang A. Mozart");
+        a2.setTitle("How Dogecoin revived me from the dead!");
+        articles.add(a2);
+
+        ac.setArticles(articles);
+        articles.remove(a2);
+        List<Article> actual= ac.filterList("Mr", articles);
+        List<Article> expected = articles;
+
+        assertEquals(expected,actual);
+    }
+    @Test
+    // tests if the method does not differentiate between words starting with upper and lower case
     public void filterList3(){
         a1.setAuthor("Mr Test");
         a1.setTitle("The future of testing.");
         articles.add(a1);
         a2.setAuthor("Wolfgang A. Mozart");
         a2.setTitle("How dogecoin revived me from the dead!");
+        articles.add(a2);
 
         ac.setArticles(articles);
         List<Article> actual= ac.filterList("Doge", articles);
+        articles.remove(a1);
+        List<Article> expected = articles;
+
+        assertEquals(expected,actual);
+    }
+    @Test
+    // tests if the method does not differentiate between words starting with upper and lower case
+    public void filterList4(){
+        a1.setAuthor("Mr Test");
+        a1.setTitle("The future of testing.");
+        articles.add(a1);
+        a2.setAuthor("Wolfgang A. Mozart");
+        a2.setTitle("How dogecoin revived me from the dead!");
+        articles.add(a2);
+
+        ac.setArticles(articles);
+        List<Article> actual= ac.filterList("doge", articles);
         articles.remove(a1);
         List<Article> expected = articles;
 
