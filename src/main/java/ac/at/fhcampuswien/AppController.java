@@ -7,15 +7,18 @@ import java.util.Locale;
 public class AppController {
     private List<Article> articles;
 
+    //The constructor greats a new List and in Exercise 1 articles get filled by the generateMockList() method
     public AppController() {
         articles = new ArrayList<Article>();
         articles = generateMockList();
     }
 
+    //setter for the articles
     public void setArticles(List<Article> articles) {
         this.articles = articles;
     }
 
+    //returns the amount of the Articles in the List
     public int getArticleCount() {
         if (articles.size() != 0) {
             return articles.size();
@@ -24,6 +27,7 @@ public class AppController {
         }
     }
 
+    //returns a List with the top headlines
     public List<Article> getTopHeadlinesAustria() {
         if (articles != null) {
             return articles;
@@ -32,10 +36,13 @@ public class AppController {
         }
     }
 
+    //returns a List with Bitcoin News
     public List<Article> getAllNewsBitcoin() {
         return filterList("bitcoin",articles);
     }
 
+
+    //returns a List for a specified Word in the News
     protected List<Article> filterList(String query, List<Article> articles) {
         List<Article> filteredList = new ArrayList<Article>();
 
@@ -47,6 +54,7 @@ public class AppController {
         return  filteredList;
     }
 
+    //generated Mock List for the Exercise 1
     private List<Article> generateMockList(){
         Article a1 = new Article("New York Times", "Eric Adams, a Bitcoin Booster, Is Taking First Paycheck in Crypto");
         articles.add(a1);

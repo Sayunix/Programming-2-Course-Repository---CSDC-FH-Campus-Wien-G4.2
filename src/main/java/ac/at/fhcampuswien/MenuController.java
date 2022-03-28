@@ -19,22 +19,26 @@ public class MenuController {
     @FXML
     TextArea tbx_News;
 
+    //shows top headline articles in the textbox
     public void click_Headline(){
         lbl_Information.setText("");
         tbx_News.setText(controller.getTopHeadlinesAustria().toString());
     }
 
+    //shows bitcoin articles in the textbox
     public void click_Bitcoin(){
         lbl_Information.setText("");
         tbx_News.setText(controller.getAllNewsBitcoin().toString());
     }
 
+    //shows the amount of articles
     public void click_Amount(){
         tbx_News.setText("");
         lbl_Information.setText("Amount of Articles: " + controller.getArticleCount());
 
     }
 
+    //Closes the Application
     public void click_Exit(){
         System.exit(0);
     }
