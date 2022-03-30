@@ -3,29 +3,24 @@ package ac.at.fhcampuswien;
 import java.util.Scanner;
 
 public class Menu {
-//    Menu Klasse (4 Pkt): die Menu Klasse ist für die Ausgabe des Konsolenmenüs, sowie die
-//    Usereingaben zuständig. Wurden die Usereingaben validiert, werden diese an die
-//    entsprechenden AppController Funktionen weitergegeben (dh. die konkrete Logik vom
-//    AppController wird aufgerufen). Dementsprechend enthält die Klasse eine Membervariable
-//    von AppController. Weiters zwei konstante Membervariablen für invalide Usereingaben
-//    (INVALID_USER_INPUT_MESSAGE) und den Verabschiedungstext (EXIT_MESSAGE).
 
     AppController controller = new AppController();
     String INVALID_USER_INPUT_MESSAGE = "Invalid Input!";
     String EXIT_MESSAGE = "Goodbye Pal, have a nice day";
 
+    //Uses the printMenu Method to print out the menu and allows user input with a scanner
+
     public void start() {
 
         Scanner scanner = new Scanner(System.in);
-
-       // while (true) {
 
             printMenu();
 
             String input = scanner.next();
             handleInput(input);
-        //}
     }
+
+    //Defines which user input is handled how
 
     public void handleInput(String input) {
 
@@ -61,11 +56,15 @@ public class Menu {
 
     }
 
+
+
     public void getAllNewsBitcoin(AppController ctrl) {
 
         System.out.println(ctrl.getAllNewsBitcoin().toString());
 
     }
+
+    //Prints out message if User exits the app
 
     public void printExitMessage() {
 
@@ -73,12 +72,15 @@ public class Menu {
 
     }
 
+    //Prints out the message if the input the User puts is invalid
+
     public void printInvalidInputMessage() {
 
         System.out.println(INVALID_USER_INPUT_MESSAGE);
 
 
     }
+    //Prints out the text of the main menu
 
     public void printMenu() {
 
