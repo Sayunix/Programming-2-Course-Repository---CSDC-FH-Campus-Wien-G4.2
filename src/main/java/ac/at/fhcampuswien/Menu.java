@@ -42,7 +42,6 @@ public class Menu {
 
         }
 
-
     }
 
     public void getArticleCount(AppController ctrl) {
