@@ -5,8 +5,20 @@ public class Article {
     private String author;
     private String title;
 
+    public Article() {
+
+    }
+
     public Article(String author, String title) {
         this.author = author;
+        this.title = title;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -20,6 +32,6 @@ public class Article {
 
     @Override
     public String toString() {
-        return "Title: "+ title + "\nAuthor: " + author +" ";
+        return "Title: " + title + "\nAuthor: " + author + " ";
     }
 }

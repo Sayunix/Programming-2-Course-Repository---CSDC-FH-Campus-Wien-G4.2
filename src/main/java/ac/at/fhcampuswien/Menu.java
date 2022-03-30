@@ -18,13 +18,13 @@ public class Menu {
 
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+       // while (true) {
 
             printMenu();
 
             String input = scanner.next();
             handleInput(input);
-        }
+        //}
     }
 
     public void handleInput(String input) {
