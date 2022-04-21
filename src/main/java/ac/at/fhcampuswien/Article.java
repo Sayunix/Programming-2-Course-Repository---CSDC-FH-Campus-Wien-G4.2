@@ -12,11 +12,6 @@ public class Article {
     private String content;
 
 
-
-    //empty constructor
-    public Article(){
-    }
-
     //creates an author and a title for the article class
     public Article(String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
         this.author = author;
@@ -88,16 +83,4 @@ public class Article {
         return content;
     }
 
-    //overrrides the toString method
-
-    @Override
-    public String toString() {
-        return  author +"#"+
-                title + "#" +
-                description + "#" +
-                url + "#" +
-                urlToImage +"#" +
-                publishedAt +"#" +
-                content+"#";
-    }
 }

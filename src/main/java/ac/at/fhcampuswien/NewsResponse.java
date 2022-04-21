@@ -4,6 +4,8 @@ import java.util.List;
 
 public class NewsResponse {
 
+    //gets the Results from the API
+
     private String status;
     private int totalResults;
     private List<Article> articles;
