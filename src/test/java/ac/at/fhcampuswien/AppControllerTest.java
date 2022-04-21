@@ -22,6 +22,7 @@ public class AppControllerTest {
         articles = new ArrayList<>();
         a1 = new Article();
         a2 = new Article();
+
     }
 
     @Test
