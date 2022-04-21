@@ -118,7 +118,6 @@
                     <mainClass>ac.at.fhcampuswien.App</mainClass>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 </project>
