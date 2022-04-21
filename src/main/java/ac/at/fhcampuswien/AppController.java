@@ -10,7 +10,7 @@ public class AppController {
 
     private List<Article> articles;
 
-    //The constructor greats a new List and in Exercise 1 articles get filled by the generateMockList() method
+    //The constructor greats a new List
     public AppController(){
         articles = new ArrayList<Article>();
     }
