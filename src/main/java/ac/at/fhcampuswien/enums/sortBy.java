@@ -1,4 +1,4 @@
-package ac.at.fhcampuswien;
+package ac.at.fhcampuswien.enums;
 
 public enum sortBy {
     relevancy,popularity,publishedAt

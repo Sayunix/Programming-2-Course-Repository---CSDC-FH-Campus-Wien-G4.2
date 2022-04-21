@@ -1,4 +1,4 @@
-package ac.at.fhcampuswien;
+package ac.at.fhcampuswien.classes;
 
 public class Article {
 //creates a template for an article

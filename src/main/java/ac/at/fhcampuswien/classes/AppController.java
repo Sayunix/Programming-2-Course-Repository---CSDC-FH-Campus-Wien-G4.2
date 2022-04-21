@@ -1,4 +1,6 @@
-package ac.at.fhcampuswien;
+package ac.at.fhcampuswien.classes;
+
+import ac.at.fhcampuswien.enums.endpoint;
 
 import java.io.IOException;
 import java.util.ArrayList;

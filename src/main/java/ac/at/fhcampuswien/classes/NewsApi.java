@@ -1,4 +1,4 @@
-package ac.at.fhcampuswien;
+package ac.at.fhcampuswien.classes;
 
 import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
