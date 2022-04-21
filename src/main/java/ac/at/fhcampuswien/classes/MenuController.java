@@ -1,5 +1,6 @@
-package ac.at.fhcampuswien;
+package ac.at.fhcampuswien.classes;
 
+import ac.at.fhcampuswien.enums.country;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

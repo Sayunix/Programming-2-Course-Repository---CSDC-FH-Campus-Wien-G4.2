@@ -1,4 +1,4 @@
-package ac.at.fhcampuswien;
+package ac.at.fhcampuswien.enums;
 
 public enum country {
     ar("Argentinia"),at("Austria"),au("Australia"),be("Belgium"),bg("Bulgaria"),br("Brazil"),ca("Canada"),

@@ -115,7 +115,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>ac.at.fhcampuswien.App</mainClass>
+                    <mainClass>ac.at.fhcampuswien.classes.App</mainClass>
                 </configuration>
             </plugin>
         </plugins>
