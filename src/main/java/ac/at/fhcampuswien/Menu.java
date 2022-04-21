@@ -14,10 +14,10 @@ public class Menu {
 
         Scanner scanner = new Scanner(System.in);
 
-            printMenu();
+        printMenu();
 
-            String input = scanner.next();
-            handleInput(input);
+        String input = scanner.next();
+        handleInput(input);
     }
 
     //Defines which user input is handled how
@@ -43,11 +43,13 @@ public class Menu {
         }
 
     }
+    //Prints out the count of articles
 
     public void getArticleCount(AppController ctrl) {
         System.out.println(ctrl.getArticleCount());
 
     }
+    //Prints out the top headlines in austria
 
     public void getTopHeadlinesAustria(AppController ctrl) {
         System.out.println(ctrl.getTopHeadlinesAustria().toString());
@@ -55,7 +57,7 @@ public class Menu {
 
     }
 
-
+    //Prints out the bitcoin news
 
     public void getAllNewsBitcoin(AppController ctrl) {
 
