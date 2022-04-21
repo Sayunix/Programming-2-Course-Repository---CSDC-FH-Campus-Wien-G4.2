@@ -64,5 +64,6 @@ public class AppController {
         articles.add(a3);
 
         return articles;
+
     }
 }
