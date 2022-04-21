@@ -47,13 +47,11 @@ public class Menu {
 
     public void getArticleCount(AppController ctrl) {
         System.out.println(ctrl.getArticleCount());
-
     }
     //Prints out the top headlines in austria
 
     public void getTopHeadlinesAustria(AppController ctrl) {
         System.out.println(ctrl.getTopHeadlinesAustria().toString());
-
 
     }
 
