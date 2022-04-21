@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppControllerTest {
-    private AppController ac = new AppController();
+  /**  private AppController ac = new AppController();
     private List<Article> articles;
     private Article a1;
     private Article a2;
@@ -184,5 +184,5 @@ public class AppControllerTest {
         List<Article> expected = articles;
 
         assertEquals(expected,actual);
-    }
+    }**/
 }
