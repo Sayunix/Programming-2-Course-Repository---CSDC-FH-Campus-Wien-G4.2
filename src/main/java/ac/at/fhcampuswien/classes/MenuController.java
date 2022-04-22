@@ -36,11 +36,8 @@ public class MenuController implements Initializable {
 
     public void click_search() throws IOException{
         tbv_News.getItems().clear();
-        if (txf_search.equals("")){
-            q = txf_search.getPromptText();
-        }else {
-            q = txf_search.getText();
-        }
+
+        q = txf_search.getText();
 
         if(cbx_country.getSelectionModel().isEmpty()){
             cbx_country.setValue(country.at);
