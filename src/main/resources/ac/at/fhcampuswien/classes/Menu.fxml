@@ -32,22 +32,22 @@
       </TableView>
       <Pane fx:id="pn_headlines" prefHeight="47.0" prefWidth="829.0" visible="false">
          <children>
-            <TextField fx:id="txf_search" disable="true" layoutX="69.0" layoutY="11.0" prefHeight="25.0" prefWidth="205.0" />
-            <Button fx:id="btn_searchheadlines" disable="true" layoutX="739.0" layoutY="11.0" mnemonicParsing="false" onAction="#click_search" prefHeight="25.0" prefWidth="74.0" text="Search" />
-            <ComboBox fx:id="cbx_country" disable="true" layoutX="332.0" layoutY="11.0" prefWidth="150.0" promptText="All Countries" />
+            <TextField fx:id="txf_search" layoutX="69.0" layoutY="11.0" prefHeight="25.0" prefWidth="205.0" />
+            <Button fx:id="btn_searchheadlines" layoutX="739.0" layoutY="11.0" mnemonicParsing="false" onAction="#click_search" prefHeight="25.0" prefWidth="74.0" text="Search" />
+            <ComboBox fx:id="cbx_country" layoutX="332.0" layoutY="11.0" prefWidth="150.0" promptText="All Countries" />
             <Label layoutX="14.0" layoutY="15.0" text="Keyword:" />
             <Label layoutX="287.0" layoutY="15.0" text="Nation:" />
             <Label layoutX="500.0" layoutY="15.0" text="Category:" />
-            <ComboBox fx:id="cbx_category" disable="true" layoutX="557.0" layoutY="11.0" prefWidth="150.0" promptText="General" />
+            <ComboBox fx:id="cbx_category" layoutX="557.0" layoutY="11.0" prefWidth="150.0" promptText="General" />
          </children>
       </Pane>
       <Pane fx:id="pn_bitcoin" prefHeight="47.0" prefWidth="557.0" visible="false">
          <children>
-            <Button fx:id="btn_searchbitcoin" disable="true" layoutX="462.0" layoutY="11.0" mnemonicParsing="false" onAction="#click_search" prefHeight="25.0" prefWidth="74.0" text="Search" />
-            <ComboBox fx:id="cbx_sortby" disable="true" layoutX="285.0" layoutY="11.0" prefWidth="150.0" promptText="Newest Article First" />
+            <Button fx:id="btn_searchbitcoin" layoutX="462.0" layoutY="11.0" mnemonicParsing="false" onAction="#click_search" prefHeight="25.0" prefWidth="74.0" text="Search" />
+            <ComboBox fx:id="cbx_sortby" layoutX="285.0" layoutY="11.0" prefWidth="150.0" promptText="Newest Article First" />
             <Label layoutX="14.0" layoutY="15.0" text="Language:" />
             <Label layoutX="238.0" layoutY="15.0" text="Sort By:" />
-            <ComboBox fx:id="cbx_language" disable="true" layoutX="75.0" layoutY="11.0" prefWidth="150.0" promptText="All Languages" />
+            <ComboBox fx:id="cbx_language" layoutX="75.0" layoutY="11.0" prefWidth="150.0" promptText="All Languages" />
          </children>
       </Pane>
    </children>

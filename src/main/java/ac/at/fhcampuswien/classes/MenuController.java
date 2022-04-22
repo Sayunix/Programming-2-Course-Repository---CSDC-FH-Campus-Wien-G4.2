@@ -9,9 +9,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,6 +48,7 @@ public class MenuController implements Initializable {
     Pane pn_headlines, pn_bitcoin;
 
     public void click_search() throws IOException{
+        lbl_Information.setText("");
         tbv_News.getItems().clear();
 
 
@@ -79,66 +85,18 @@ public class MenuController implements Initializable {
             ObservableList<Article> ob = FXCollections.observableArrayList(controller.getAllNewsBitcoin(selectedlanguage.name(), selectedsortby.name()));
             tbv_News.setItems(ob);
         }
-
-        pn_bitcoin.setVisible(false);
-        pn_headlines.setVisible(false);
-
-
-        btn_Headlines.setDisable(false);
-        btn_Bitcoin.setDisable(false);
-        btn_ArticleCount.setDisable(false);
-
-        cbx_language.setDisable(true);
-        cbx_sortby.setDisable(true);
-        cbx_country.setDisable(true);
-        cbx_category.setDisable(true);
-        txf_search.setDisable(true);
-        btn_searchheadlines.setDisable(true);
-        btn_searchbitcoin.setDisable(true);
     }
 
     //shows top headline articles in the textbox
     public void click_Headline() throws IOException {
-        lbl_Information.setText("");
-
         pn_bitcoin.setVisible(false);
-
         pn_headlines.setVisible(true);
-
-        btn_Headlines.setDisable(true);
-        btn_Bitcoin.setDisable(true);
-        btn_ArticleCount.setDisable(true);
-        cbx_sortby.setDisable(true);
-        cbx_language.setDisable(true);
-        btn_searchbitcoin.setDisable(true);
-
-        cbx_country.setDisable(false);
-        cbx_category.setDisable(false);
-        txf_search.setDisable(false);
-        btn_searchheadlines.setDisable(false);
     }
 
     //shows bitcoin articles in the textbox
     public void click_Bitcoin() throws IOException {
-        lbl_Information.setText("");
-
-
         pn_headlines.setVisible(false);
-
         pn_bitcoin.setVisible(true);
-
-
-        btn_Headlines.setDisable(true);
-        btn_Bitcoin.setDisable(true);
-        btn_ArticleCount.setDisable(true);
-        txf_search.setDisable(true);
-        cbx_country.setDisable(true);
-        cbx_category.setDisable(true);
-        btn_searchheadlines.setDisable(true);
-
-        cbx_language.setDisable(false);
-        cbx_sortby.setDisable(false);
-        btn_searchbitcoin.setDisable(false);
     }
 
     //shows the amount of articles
