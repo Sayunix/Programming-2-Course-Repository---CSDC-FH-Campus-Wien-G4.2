@@ -13,14 +13,9 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="txf_search" disable="true" layoutX="69.0" layoutY="14.0" prefHeight="25.0" prefWidth="205.0" />
-      <Button fx:id="btn_search" disable="true" layoutX="494.0" layoutY="14.0" mnemonicParsing="false" onAction="#click_search" prefHeight="25.0" prefWidth="74.0" text="Search" />
       <Button fx:id="btn_Headlines" focusTraversable="false" layoutX="52.0" layoutY="546.0" mnemonicParsing="false" onAction="#click_Headline" prefHeight="38.0" prefWidth="199.0" text="Get Top Headlines" />
       <Button fx:id="btn_Bitcoin" focusTraversable="false" layoutX="260.0" layoutY="546.0" mnemonicParsing="false" onAction="#click_Bitcoin" prefHeight="38.0" prefWidth="199.0" text="Get Bitcoin News" />
       <Label fx:id="lbl_news" layoutX="14.0" layoutY="50.0" text="News:" />
-      <ComboBox fx:id="cbx_country" disable="true" layoutX="329.0" layoutY="14.0" prefWidth="150.0" promptText="Austria" />
-      <Label layoutX="14.0" layoutY="18.0" text="Keyword:" />
-      <Label layoutX="284.0" layoutY="18.0" text="Nation:" />
       <TableView fx:id="tbv_News" editable="true" fixedCellSize="0.0" layoutX="52.0" layoutY="50.0" prefHeight="417.0" prefWidth="931.0" tableMenuButtonVisible="true">
          <columns>
             <TableColumn fx:id="tbc_author" prefWidth="115.0" text="Author" />
@@ -35,5 +30,25 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Pane fx:id="pn_headlines" prefHeight="47.0" prefWidth="829.0" visible="false">
+         <children>
+            <TextField fx:id="txf_search" disable="true" layoutX="69.0" layoutY="11.0" prefHeight="25.0" prefWidth="205.0" />
+            <Button fx:id="btn_searchheadlines" disable="true" layoutX="739.0" layoutY="11.0" mnemonicParsing="false" onAction="#click_search" prefHeight="25.0" prefWidth="74.0" text="Search" />
+            <ComboBox fx:id="cbx_country" disable="true" layoutX="332.0" layoutY="11.0" prefWidth="150.0" promptText="All Countries" />
+            <Label layoutX="14.0" layoutY="15.0" text="Keyword:" />
+            <Label layoutX="287.0" layoutY="15.0" text="Nation:" />
+            <Label layoutX="500.0" layoutY="15.0" text="Category:" />
+            <ComboBox fx:id="cbx_category" disable="true" layoutX="557.0" layoutY="11.0" prefWidth="150.0" promptText="General" />
+         </children>
+      </Pane>
+      <Pane fx:id="pn_bitcoin" prefHeight="47.0" prefWidth="557.0" visible="false">
+         <children>
+            <Button fx:id="btn_searchbitcoin" disable="true" layoutX="462.0" layoutY="11.0" mnemonicParsing="false" onAction="#click_search" prefHeight="25.0" prefWidth="74.0" text="Search" />
+            <ComboBox fx:id="cbx_sortby" disable="true" layoutX="285.0" layoutY="11.0" prefWidth="150.0" promptText="Newest Article First" />
+            <Label layoutX="14.0" layoutY="15.0" text="Language:" />
+            <Label layoutX="238.0" layoutY="15.0" text="Sort By:" />
+            <ComboBox fx:id="cbx_language" disable="true" layoutX="75.0" layoutY="11.0" prefWidth="150.0" promptText="All Languages" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

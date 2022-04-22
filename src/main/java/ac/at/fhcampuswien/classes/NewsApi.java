@@ -11,7 +11,7 @@ public class NewsApi {
     NewsResponse newsResponse = new NewsResponse();
 
     private String URL = "https://newsapi.org/v2/";
-    private String apiKey = "?apiKey=1822ed653d964bf3b3b280eafc9b6a6b";
+    private String apiKey = "?apiKey=092d58d1782045b4b3f8e1d3281e4296";
 
     private static String q;
     private static String endpoint;
@@ -63,8 +63,14 @@ public class NewsApi {
     public String generateURL(){
         String tmpURL;
         if (endpoint.equals("top-headlines")) {
+            if (country.equals("all")){
+                setCountry("");
+            }
             tmpURL = URL + getEndpoint() + apiKey + getQ() + getCountry() + getCategory();
         }else{
+            if (language.equals("all")){
+                setLanguage("");
+            }
             tmpURL = URL + getEndpoint() + apiKey + getQ() + getSortBy() + getLanguage();
         }
 

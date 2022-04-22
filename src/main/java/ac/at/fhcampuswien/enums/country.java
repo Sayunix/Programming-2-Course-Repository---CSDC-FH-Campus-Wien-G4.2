@@ -1,7 +1,7 @@
 package ac.at.fhcampuswien.enums;
 
 public enum country {
-    ar("Argentinia"),at("Austria"),au("Australia"),be("Belgium"),bg("Bulgaria"),br("Brazil"),ca("Canada"),
+    all("All Countries"), ar("Argentinia"),at("Austria"),au("Australia"),be("Belgium"),bg("Bulgaria"),br("Brazil"),ca("Canada"),
     cn("China"),co("Colombia"),cu("Cuba"),cz("Czech Republic"),de("Germany"),eg("Egypt"),fr("France"),
     gb("Great Britain"),gr("Greece"),hk("Hong Kong"),hu("Hungary"),id("Indonesia"),in("India"),ie("Ireland"),
     il("Israel"),it("Italy"),jp("Japan"),lv("Latvia"),lt("Lithuania"),my("Malaysia"),mx("Mexico"),

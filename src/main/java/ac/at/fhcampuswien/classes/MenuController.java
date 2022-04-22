@@ -19,10 +19,9 @@ import java.util.ResourceBundle;
 public class MenuController implements Initializable {
     String q;
     AppController controller = new AppController();
-    ObservableList<Article> ob;
 
     @FXML
-    Button btn_Headlines, btn_Exit, btn_ArticleCount, btn_search, btn_Bitcoin;
+    Button btn_Headlines, btn_Exit, btn_ArticleCount, btn_searchheadlines, btn_searchbitcoin, btn_Bitcoin;
 
     @FXML
     Label lbl_Information;
@@ -46,11 +45,12 @@ public class MenuController implements Initializable {
     public void click_search() throws IOException{
         tbv_News.getItems().clear();
 
+
         if (pn_headlines.isVisible()) {
             q = txf_search.getText();
 
             if (cbx_country.getSelectionModel().isEmpty()) {
-                cbx_country.setValue(country.at);
+                cbx_country.setValue(country.all);
             }
 
             if (cbx_category.getSelectionModel().isEmpty()) {
@@ -61,28 +61,27 @@ public class MenuController implements Initializable {
 
             category selectedcategory = (category) cbx_category.getSelectionModel().getSelectedItem();
 
-            ob = FXCollections.observableArrayList(controller.getTopHeadlines(q, selectedcountry.name(), selectedcategory.name()));
+            ObservableList<Article> ob = FXCollections.observableArrayList(controller.getTopHeadlines(q, selectedcountry.name(), selectedcategory.name()));
+            tbv_News.setItems(ob);
         }else{
             if (cbx_language.getSelectionModel().isEmpty()) {
-                cbx_language.setValue(language.de);
+                cbx_language.setValue(language.all);
             }
 
             if (cbx_sortby.getSelectionModel().isEmpty()) {
-                cbx_sortby.setValue(sortBy.relevancy);
+                cbx_sortby.setValue(sortBy.publishedAt);
             }
 
             language selectedlanguage = (language) cbx_language.getSelectionModel().getSelectedItem();
 
             sortBy selectedsortby = (sortBy) cbx_sortby.getSelectionModel().getSelectedItem();
 
-            ob = FXCollections.observableArrayList(controller.getAllNewsBitcoin(selectedlanguage.name(), selectedsortby.name()));
+            ObservableList<Article> ob = FXCollections.observableArrayList(controller.getAllNewsBitcoin(selectedlanguage.name(), selectedsortby.name()));
+            tbv_News.setItems(ob);
         }
-
-        tbv_News.setItems(ob);
 
         pn_bitcoin.setVisible(false);
         pn_headlines.setVisible(false);
-        btn_search.setVisible(false);
 
 
         btn_Headlines.setDisable(false);
@@ -94,7 +93,8 @@ public class MenuController implements Initializable {
         cbx_country.setDisable(true);
         cbx_category.setDisable(true);
         txf_search.setDisable(true);
-        btn_search.setDisable(true);
+        btn_searchheadlines.setDisable(true);
+        btn_searchbitcoin.setDisable(true);
     }
 
     //shows top headline articles in the textbox
@@ -104,18 +104,18 @@ public class MenuController implements Initializable {
         pn_bitcoin.setVisible(false);
 
         pn_headlines.setVisible(true);
-        btn_search.setVisible(true);
 
         btn_Headlines.setDisable(true);
         btn_Bitcoin.setDisable(true);
         btn_ArticleCount.setDisable(true);
         cbx_sortby.setDisable(true);
         cbx_language.setDisable(true);
+        btn_searchbitcoin.setDisable(true);
 
         cbx_country.setDisable(false);
         cbx_category.setDisable(false);
         txf_search.setDisable(false);
-        btn_search.setDisable(false);
+        btn_searchheadlines.setDisable(false);
     }
 
     //shows bitcoin articles in the textbox
@@ -126,7 +126,6 @@ public class MenuController implements Initializable {
         pn_headlines.setVisible(false);
 
         pn_bitcoin.setVisible(true);
-        btn_search.setVisible(true);
 
 
         btn_Headlines.setDisable(true);
@@ -135,10 +134,11 @@ public class MenuController implements Initializable {
         txf_search.setDisable(true);
         cbx_country.setDisable(true);
         cbx_category.setDisable(true);
+        btn_searchheadlines.setDisable(true);
 
         cbx_language.setDisable(false);
         cbx_sortby.setDisable(false);
-        btn_search.setDisable(false);
+        btn_searchbitcoin.setDisable(false);
     }
 
     //shows the amount of articles
@@ -155,6 +155,8 @@ public class MenuController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cbx_country.setItems(FXCollections.observableArrayList(country.values()));
         cbx_category.setItems(FXCollections.observableArrayList(category.values()));
+        cbx_language.setItems(FXCollections.observableArrayList(language.values()));
+        cbx_sortby.setItems(FXCollections.observableArrayList(sortBy.values()));
 
 
         tbc_author.setCellValueFactory(new PropertyValueFactory<>("author"));
