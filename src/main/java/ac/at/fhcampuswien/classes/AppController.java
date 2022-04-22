@@ -28,10 +28,11 @@ public class AppController {
     }
 
     //returns a List with the top headlines
-    public List<Article> getTopHeadlines(String q, String selectCountry) throws IOException {
+    public List<Article> getTopHeadlines(String q, String selectCountry, String selectedCategory) throws IOException {
         newsApi.setQ(q);
         newsApi.setCountry(selectCountry);
         newsApi.setEndpoint(endpoint.top_headlines.toString());
+        newsApi.setCategory(selectedCategory);
 
         newsResponse = newsApi.deserializeArticle(newsApi.generateURL());
 
@@ -39,9 +40,11 @@ public class AppController {
     }
 
     //returns a List with Bitcoin News
-    public List<Article> getAllNewsBitcoin() throws IOException {
+    public List<Article> getAllNewsBitcoin(String selectedLanguage, String selectedSortBy) throws IOException {
         newsApi.setQ("bitcoin");
         newsApi.setEndpoint(endpoint.everything.toString());
+        newsApi.setLanguage(selectedLanguage);
+        newsApi.setSortBy(selectedSortBy);
 
         newsResponse = newsApi.deserializeArticle(newsApi.generateURL());
 

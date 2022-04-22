@@ -1,12 +1,17 @@
 package ac.at.fhcampuswien.classes;
 
+import ac.at.fhcampuswien.enums.category;
 import ac.at.fhcampuswien.enums.country;
+import ac.at.fhcampuswien.enums.language;
+import ac.at.fhcampuswien.enums.sortBy;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +19,7 @@ import java.util.ResourceBundle;
 public class MenuController implements Initializable {
     String q;
     AppController controller = new AppController();
+    ObservableList<Article> ob;
 
     @FXML
     Button btn_Headlines, btn_Exit, btn_ArticleCount, btn_search, btn_Bitcoin;
@@ -26,7 +32,7 @@ public class MenuController implements Initializable {
     TextField txf_search;
 
     @FXML
-    ComboBox cbx_country;
+    ComboBox cbx_country,cbx_category,cbx_language, cbx_sortby;
 
     @FXML
     TableView<Article> tbv_News;
@@ -34,49 +40,105 @@ public class MenuController implements Initializable {
     @FXML
     TableColumn<Article,String> tbc_author,tbc_title, tbc_description,tbc_url, tbc_urlimage, tbc_published, tbc_content;
 
+    @FXML
+    Pane pn_headlines, pn_bitcoin;
+
     public void click_search() throws IOException{
         tbv_News.getItems().clear();
 
-        q = txf_search.getText();
+        if (pn_headlines.isVisible()) {
+            q = txf_search.getText();
 
-        if(cbx_country.getSelectionModel().isEmpty()){
-            cbx_country.setValue(country.at);
+            if (cbx_country.getSelectionModel().isEmpty()) {
+                cbx_country.setValue(country.at);
+            }
+
+            if (cbx_category.getSelectionModel().isEmpty()) {
+                cbx_category.setValue(category.general);
+            }
+
+            country selectedcountry = (country) cbx_country.getSelectionModel().getSelectedItem();
+
+            category selectedcategory = (category) cbx_category.getSelectionModel().getSelectedItem();
+
+            ob = FXCollections.observableArrayList(controller.getTopHeadlines(q, selectedcountry.name(), selectedcategory.name()));
+        }else{
+            if (cbx_language.getSelectionModel().isEmpty()) {
+                cbx_language.setValue(language.de);
+            }
+
+            if (cbx_sortby.getSelectionModel().isEmpty()) {
+                cbx_sortby.setValue(sortBy.relevancy);
+            }
+
+            language selectedlanguage = (language) cbx_language.getSelectionModel().getSelectedItem();
+
+            sortBy selectedsortby = (sortBy) cbx_sortby.getSelectionModel().getSelectedItem();
+
+            ob = FXCollections.observableArrayList(controller.getAllNewsBitcoin(selectedlanguage.name(), selectedsortby.name()));
         }
-        country selectedcountry = (country) cbx_country.getSelectionModel().getSelectedItem();
 
-
-        ObservableList<Article> ob = FXCollections.observableArrayList(controller.getTopHeadlines(q,selectedcountry.name()));
         tbv_News.setItems(ob);
 
-        lbl_Information.setText("");
+        pn_bitcoin.setVisible(false);
+        pn_headlines.setVisible(false);
+        btn_search.setVisible(false);
 
-        txf_search.setDisable(true);
-        btn_search.setDisable(true);
+
         btn_Headlines.setDisable(false);
         btn_Bitcoin.setDisable(false);
         btn_ArticleCount.setDisable(false);
+
+        cbx_language.setDisable(true);
+        cbx_sortby.setDisable(true);
         cbx_country.setDisable(true);
+        cbx_category.setDisable(true);
+        txf_search.setDisable(true);
+        btn_search.setDisable(true);
     }
 
     //shows top headline articles in the textbox
     public void click_Headline() throws IOException {
+        lbl_Information.setText("");
 
-        txf_search.setDisable(false);
-        btn_search.setDisable(false);
+        pn_bitcoin.setVisible(false);
+
+        pn_headlines.setVisible(true);
+        btn_search.setVisible(true);
+
         btn_Headlines.setDisable(true);
         btn_Bitcoin.setDisable(true);
         btn_ArticleCount.setDisable(true);
+        cbx_sortby.setDisable(true);
+        cbx_language.setDisable(true);
+
         cbx_country.setDisable(false);
+        cbx_category.setDisable(false);
+        txf_search.setDisable(false);
+        btn_search.setDisable(false);
     }
 
     //shows bitcoin articles in the textbox
     public void click_Bitcoin() throws IOException {
-        tbv_News.getItems().clear();
-
-        ObservableList<Article> ob = FXCollections.observableArrayList(controller.getAllNewsBitcoin());
-        tbv_News.setItems(ob);
-
         lbl_Information.setText("");
+
+
+        pn_headlines.setVisible(false);
+
+        pn_bitcoin.setVisible(true);
+        btn_search.setVisible(true);
+
+
+        btn_Headlines.setDisable(true);
+        btn_Bitcoin.setDisable(true);
+        btn_ArticleCount.setDisable(true);
+        txf_search.setDisable(true);
+        cbx_country.setDisable(true);
+        cbx_category.setDisable(true);
+
+        cbx_language.setDisable(false);
+        cbx_sortby.setDisable(false);
+        btn_search.setDisable(false);
     }
 
     //shows the amount of articles
@@ -92,6 +154,8 @@ public class MenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cbx_country.setItems(FXCollections.observableArrayList(country.values()));
+        cbx_category.setItems(FXCollections.observableArrayList(category.values()));
+
 
         tbc_author.setCellValueFactory(new PropertyValueFactory<>("author"));
         tbc_title.setCellValueFactory(new PropertyValueFactory<>("title"));
