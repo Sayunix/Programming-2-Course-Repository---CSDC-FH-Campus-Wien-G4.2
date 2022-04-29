@@ -22,12 +22,12 @@ public class AppController {
         this.articles = articles;
     }
 
-    //returns the amount of the Articles in the List
+    //returns the amount of the Articles, which is taken from an attribute from NewsResponse
     public int getArticleCount() {
         return newsResponse.getTotalResults();
     }
 
-    //returns a List with the top headlines
+    //creates a URL for the Request and returns a List with the top headlines, which is Responsed from the API
     public List<Article> getTopHeadlines(String q, String selectCountry, String selectedCategory) throws IOException {
         newsApi.setQ(q);
         newsApi.setCountry(selectCountry);
@@ -39,7 +39,7 @@ public class AppController {
         return newsResponse.getArticles();
     }
 
-    //returns a List with Bitcoin News
+    //creates a URL for the Request and returns a List with the Bitcoin-News, which is Responsed from the API
     public List<Article> getAllNewsBitcoin(String selectedLanguage, String selectedSortBy) throws IOException {
         newsApi.setQ("bitcoin");
         newsApi.setEndpoint(endpoint.everything.toString());
