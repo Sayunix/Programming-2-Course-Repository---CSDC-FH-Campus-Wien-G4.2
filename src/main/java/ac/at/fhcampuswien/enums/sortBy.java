@@ -1,5 +1,6 @@
 package ac.at.fhcampuswien.enums;
 
+//sorts news by relevancy, popularity or publishing date
 public enum sortBy {
     relevancy("Relevancy"),
     popularity("Popular"),
