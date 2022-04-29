@@ -1,6 +1,6 @@
 package ac.at.fhcampuswien.enums;
 
-//enum class used for sorting after the following topics
+//enum class used for sorting after the following topics:
 public enum category {
     business("Business"),
     entertainment("Entertainment"),
