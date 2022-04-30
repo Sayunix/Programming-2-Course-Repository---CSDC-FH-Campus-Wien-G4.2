@@ -10,14 +10,17 @@ public class NewsResponse {
     private int totalResults;
     private List<Article> articles;
 
+    //returns status
     public String getStatus() {
         return status;
     }
 
+    //returns total results
     public int getTotalResults() {
         return totalResults;
     }
 
+    //returns list of articles
     public List<Article> getArticles() {
         return articles;
     }
