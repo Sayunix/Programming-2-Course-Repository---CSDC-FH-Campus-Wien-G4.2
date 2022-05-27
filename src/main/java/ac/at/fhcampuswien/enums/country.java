@@ -1,5 +1,6 @@
 package ac.at.fhcampuswien.enums;
 
+//creates an enum with all the Countries - country codes ("Alpha-2 code")
 public enum country {
     all("All Countries"), ar("Argentinia"),at("Austria"),au("Australia"),be("Belgium"),bg("Bulgaria"),br("Brazil"),ca("Canada"),
     cn("China"),co("Colombia"),cu("Cuba"),cz("Czech Republic"),de("Germany"),eg("Egypt"),fr("France"),
@@ -10,6 +11,7 @@ public enum country {
     sk("Slovakia"), si("Slovenia"),za("South Africa"), kr("South Korea"),ch("Switzerland"),tw("Taiwan"),th("Thailand"),
     tr("Turkey"),ua("Ukraine"),ae("United Arab Emirates"),us("USA"),ve("Venezuela");
 
+    //final method to prevent method overriding
     private final String getcountry;
 
     country(String getCountry) {

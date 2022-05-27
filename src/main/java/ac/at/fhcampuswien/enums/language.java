@@ -1,5 +1,6 @@
 package ac.at.fhcampuswien.enums;
 
+//provides language short codes (Code 2)
 public enum language {
     all("All Languages"), ar("Arabic"), cs("Czech"), zh("Chinese"), da("Danish"), nl("Dutch"), en("English"), fi("Finnish"), fr("French"), de("German"),
     el("Greek, Modern"), he("Hebrew"), hi("Hindi"), hu("Hungaria"), it("Italian"), ms("Malay"), no("Norwegian"), pl("Polish"),
