@@ -57,7 +57,7 @@ public class AppController {
     }
 
     public String printAmountNYTArticles(){
-        if (articles != null){
+        if (!articles.isEmpty()){
             return ""+articles.stream().filter(article -> article.getSource().getName().equals("New York Times"))
                             .count();
         }else{
@@ -67,7 +67,7 @@ public class AppController {
     }
 
     public String printMostSource(){
-        if (articles != null){
+        if (!articles.isEmpty()){
             return  articles.stream()
                     .max(Comparator.comparing(article -> article.getSource().getName()))
                     .get().getSource().getName();
@@ -82,7 +82,7 @@ public class AppController {
                 articles.get(i).setAuthor("");
             }
         }
-        if (articles.size() != 0){
+        if (!articles.isEmpty()){
             return  articles
                     .stream()
                     .max(Comparator.comparing(article -> article.getAuthor().length()))
@@ -93,7 +93,7 @@ public class AppController {
     }
 
     public List<Article> printHeadlinesUnder15(){
-        if (articles != null){
+        if (!articles.isEmpty()){
             setArticles(articles.stream()
                     .filter(article -> article.getTitle()
                             .length() < 15).collect(Collectors.toList()));
