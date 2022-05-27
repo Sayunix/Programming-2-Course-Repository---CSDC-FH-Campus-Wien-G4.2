@@ -114,7 +114,8 @@ public class MenuController implements Initializable {
 
     public void click_amountNYTarticle(){
         lbl_Information.setText("");
-        lbl_Information.setText(""+controller.printLongestAuthorName());
+        lbl_Information.setText(""+controller.printAmountNYTArticles());
+
     }
 
 

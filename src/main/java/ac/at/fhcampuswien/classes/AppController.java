@@ -77,14 +77,10 @@ public class AppController {
     }
 
     public String printLongestAuthorName(){
-        for (int i = 0; i < articles.size(); i++) {
-            if (articles.get(i).getAuthor() == null){
-                articles.get(i).setAuthor("");
-            }
-        }
+
         if (!articles.isEmpty()){
-            return  articles
-                    .stream()
+            return  articles.stream()
+                    .filter(article -> article.getAuthor()!= null)
                     .max(Comparator.comparing(article -> article.getAuthor().length()))
                     .get().getAuthor();
         }else{
@@ -101,6 +97,18 @@ public class AppController {
             return articles;
         }
         else{
+            return new ArrayList<>();
+        }
+    }
+    public List<Article> longestDescription(){
+        if(!articles.isEmpty()){
+            setArticles(articles.stream()
+                    .filter(article -> article.getDescription() != null && article.getDescription().length() < 145)
+                    .sorted((article1, article2) -> article2.getDescription().length() - article1.getDescription().length())
+                    .collect(Collectors.toList()));
+            return articles;
+
+        }else{
             return new ArrayList<>();
         }
     }
