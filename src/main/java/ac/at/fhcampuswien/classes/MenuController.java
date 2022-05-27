@@ -72,8 +72,6 @@ public class MenuController implements Initializable {
             ObservableList<Article> ob = FXCollections.observableArrayList(controller.getTopHeadlines(txf_search.getText(), selectedcountry.name(), selectedcategory.name()));
             tbv_News.setItems(ob);
 
-            lbl_Information.setText(""+controller.printLongestAuthorName());
-
         }else{
             if (cbx_language.getSelectionModel().isEmpty()) {
                 cbx_language.setValue(language.all);
@@ -123,7 +121,7 @@ public class MenuController implements Initializable {
     //Initialize will run as soon as the Program is started
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //fills the ComboBoxes with the values of each Enum
+        //fills the ComboBoxes with the values of each Enum.
         cbx_country.setItems(FXCollections.observableArrayList(country.values()));
         cbx_category.setItems(FXCollections.observableArrayList(category.values()));
         cbx_language.setItems(FXCollections.observableArrayList(language.values()));

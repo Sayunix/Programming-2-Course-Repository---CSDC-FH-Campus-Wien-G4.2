@@ -10,6 +10,10 @@ public class NewsResponse {
     private int totalResults;
     private List<Article> articles;
 
+    public void setTotalResults(int totalResults) {
+        this.totalResults = totalResults;
+    }
+
     public String getStatus() {
         return status;
     }
