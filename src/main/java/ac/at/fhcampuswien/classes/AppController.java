@@ -103,7 +103,7 @@ public class AppController {
     public List<Article> longestDescription(){
         if(!articles.isEmpty()){
             setArticles(articles.stream()
-                    .filter(article -> article.getDescription() != null && article.getDescription().length() < 145)
+                    .filter(article -> article.getDescription() != null)
                     .sorted((article1, article2) -> article2.getDescription().length() - article1.getDescription().length())
                     .collect(Collectors.toList()));
             return articles;
