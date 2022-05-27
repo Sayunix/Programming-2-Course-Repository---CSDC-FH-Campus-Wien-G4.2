@@ -22,7 +22,7 @@ public class MenuController implements Initializable {
     AppController controller = new AppController();
 
     @FXML
-    Button btn_Headlines, btn_Exit, btn_ArticleCount, btn_searchheadlines, btn_searchbitcoin, btn_Bitcoin;
+    Button btn_Headlines, btn_Exit, btn_ArticleCount, btn_searchheadlines, btn_searchbitcoin, btn_Bitcoin, btn_amountNYTarticles;
 
     @FXML
     Label lbl_Information;
@@ -71,6 +71,9 @@ public class MenuController implements Initializable {
             //To add "Objects" in the TableView we need to create a ObservableList. The input will be the deserialized NewsApi Input.
             ObservableList<Article> ob = FXCollections.observableArrayList(controller.getTopHeadlines(txf_search.getText(), selectedcountry.name(), selectedcategory.name()));
             tbv_News.setItems(ob);
+
+            lbl_Information.setText(""+controller.printLongestAuthorName());
+
         }else{
             if (cbx_language.getSelectionModel().isEmpty()) {
                 cbx_language.setValue(language.all);
@@ -102,12 +105,18 @@ public class MenuController implements Initializable {
 
     //shows the amount of articles
     public void click_Amount(){
+        lbl_Information.setText("");
         lbl_Information.setText("Amount of Articles: " + controller.getArticleCount());
     }
 
     //Closes the Application
     public void click_Exit(){
         System.exit(0);
+    }
+
+    public void click_amountNYTarticle(){
+        lbl_Information.setText("");
+        lbl_Information.setText(""+controller.printAmountNYTArticles());
     }
 
 

@@ -4,11 +4,16 @@ import ac.at.fhcampuswien.enums.endpoint;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class AppController {
     NewsApi newsApi = new NewsApi();
     NewsResponse newsResponse = new NewsResponse();
+    Source source = new Source();
 
     private List<Article> articles;
 
@@ -35,8 +40,9 @@ public class AppController {
         newsApi.setCategory(selectedCategory);
 
         newsResponse = newsApi.deserializeArticle(newsApi.generateURL());
+        setArticles(newsResponse.getArticles());
 
-        return newsResponse.getArticles();
+        return articles;
     }
 
     //creates a URL for the Request and returns a List with the Bitcoin-News, which is Responsed from the API
@@ -47,9 +53,48 @@ public class AppController {
         newsApi.setSortBy(selectedSortBy);
 
         newsResponse = newsApi.deserializeArticle(newsApi.generateURL());
+        setArticles(newsResponse.getArticles());
 
-        return newsResponse.getArticles();
+        return articles;
     }
+
+    public String printAmountNYTArticles(){
+        if (articles != null){
+            return ""+articles.stream().filter(article -> article.getSource().getName().equals("New York Times"))
+                            .count();
+        }else{
+            return "No Articles in the List!";
+        }
+    }
+
+    public String printMostSource(){
+        if (articles != null){
+            return  articles.stream()
+                    .max(Comparator.comparing(article -> article.getSource().getName()))
+                    .get().getSource().getName();
+        }else{
+            return "No Articles in the List!";
+        }
+    }
+
+    public String printLongestAuthorName(){
+        if (articles != null){
+            return  articles.stream()
+                    .max(Comparator.comparing(article -> article.getAuthor().length()))
+                    .get().getAuthor();
+        }else{
+            return "No Articles in the List!";
+        }
+    }
+
+    public List<Article> printHeadlineArticle(){
+
+        return  articles.stream()
+                    .max(Comparator.comparing(article -> article.getAuthor().length()));
+
+    }
+
+
 
 
     /**  //returns a List for a specified Word in the News

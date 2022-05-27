@@ -10,10 +10,12 @@ public class Article {
     private String urlToImage;
     private String publishedAt;
     private String content;
+    private Source source;
 
 
     //creates an author and a title for the article class
-    public Article(String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
+    public Article(Source source, String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
+        this.source = source;
         this.author = author;
         this.title = title;
         this.description = description;
@@ -23,36 +25,6 @@ public class Article {
         this.content = content;
     }
 
-    //setter- & getter methods
-    //sets a new author variable
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    //sets a new title variable
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public void setUrlToImage(String urlToImage) {
-        this.urlToImage = urlToImage;
-    }
-
-    public void setPublishedAt(String publishedAt) {
-        this.publishedAt = publishedAt;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
     //returns a new author variable
     public String getAuthor() {
         return author;
@@ -83,4 +55,7 @@ public class Article {
         return content;
     }
 
+    public Source getSource() {
+        return source;
+    }
 }

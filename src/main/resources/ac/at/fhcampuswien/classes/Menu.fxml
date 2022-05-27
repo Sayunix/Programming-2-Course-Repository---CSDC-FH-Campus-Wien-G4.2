@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="603.0" prefWidth="1013.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ac.at.fhcampuswien.classes.MenuController">
+<AnchorPane prefHeight="643.0" prefWidth="1101.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ac.at.fhcampuswien.classes.MenuController">
    <children>
       <Button fx:id="btn_ArticleCount" focusTraversable="false" layoutX="469.0" layoutY="546.0" mnemonicParsing="false" onAction="#click_Amount" prefHeight="38.0" prefWidth="199.0" text="Amount of articles" />
       <Button fx:id="btn_Exit" focusTraversable="false" layoutX="679.0" layoutY="546.0" mnemonicParsing="false" onAction="#click_Exit" prefHeight="38.0" prefWidth="199.0" text="Exit" />
@@ -50,5 +50,6 @@
             <ComboBox fx:id="cbx_language" layoutX="75.0" layoutY="11.0" prefWidth="150.0" promptText="All Languages" />
          </children>
       </Pane>
+      <Button fx:id="btn_amountNYTarticles" layoutX="55.0" layoutY="597.0" mnemonicParsing="false" onAction="#click_amountNYTarticle" text="Amount of NYT Articles" />
    </children>
 </AnchorPane>
