@@ -56,6 +56,8 @@ public class AppController {
         return articles;
     }
 
+    //filters the list for articles that contain the phrase "New York Times"
+    //then counts the amount of articles with that phrase and returns the amount as string,so we can output it in the label
     public String printAmountNYTArticles(){
         if (!articles.isEmpty()){
             return ""+articles.stream().filter(article -> article.getSource().getName().equals("New York Times"))
@@ -76,8 +78,9 @@ public class AppController {
         }
     }
 
+    //first removes every article without a known author
+    //then returns the author with the longest name
     public String printLongestAuthorName(){
-
         if (!articles.isEmpty()){
             return  articles.stream()
                     .filter(article -> article.getAuthor()!= null)
@@ -88,6 +91,8 @@ public class AppController {
         }
     }
 
+    //filters list of articles for every article that has a title which is shorter than 15 characters
+    //after filtering returns a list to caller with filtered elements
     public List<Article> printHeadlinesUnder15(){
         if (!articles.isEmpty()){
             setArticles(articles.stream()
@@ -100,11 +105,21 @@ public class AppController {
             return new ArrayList<>();
         }
     }
+
+    //changes the description of every article that does not have a description to ""
+    //then sorts articles by the length of their description
+    //if length of the descriptions are same, filters by descriptions alphabetically
     public List<Article> longestDescription(){
+        for(int i = 0; i < articles.size();i++){
+            if(articles.get(i).getDescription() == null){
+                articles.get(i).setDescription("");
+            }
+        }
         if(!articles.isEmpty()){
             setArticles(articles.stream()
-                    .filter(article -> article.getDescription() != null)
-                    .sorted((article1, article2) -> article2.getDescription().length() - article1.getDescription().length())
+//                    .filter(article -> article.getDescription() != null)   //if we want to remove all articles with no description
+                    .sorted(Comparator.comparingInt((Article article) -> article.getDescription().length())
+                            .thenComparing(Article::getDescription))
                     .collect(Collectors.toList()));
             return articles;
 

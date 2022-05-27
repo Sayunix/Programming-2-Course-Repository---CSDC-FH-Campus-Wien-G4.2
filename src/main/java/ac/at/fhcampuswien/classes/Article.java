@@ -62,4 +62,7 @@ public class Article {
     public Source getSource() {
         return source;
     }
+
+    public void setDescription(String description) {this.description = description;
+    }
 }
