@@ -77,8 +77,14 @@ public class AppController {
     }
 
     public String printLongestAuthorName(){
-        if (articles != null){
-            return  articles.stream()
+        for (int i = 0; i < articles.size(); i++) {
+            if (articles.get(i).getAuthor() == null){
+                articles.get(i).setAuthor("");
+            }
+        }
+        if (articles.size() != 0){
+            return  articles
+                    .stream()
                     .max(Comparator.comparing(article -> article.getAuthor().length()))
                     .get().getAuthor();
         }else{
