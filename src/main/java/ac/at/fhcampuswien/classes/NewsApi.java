@@ -98,7 +98,7 @@ public class NewsApi {
 
     // takes a url as and sends a request to the api using that link and processes the response from the api
     // to a string
-    public String run(String url) throws IOException {
+    public String run(String url) throws IOException{
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(url)

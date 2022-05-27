@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class AppController {
@@ -88,12 +86,20 @@ public class AppController {
         }
     }
 
-    public List<Article> printHeadlineArticle(){
-
-        return  articles.stream()
-                    .max(Comparator.comparing(article -> article.getAuthor().length()));
-
+    public List<Article> printHeadlinesUnder15(){
+        if (articles != null){
+            setArticles(articles.stream()
+                    .filter(article -> article.getTitle()
+                            .length() < 15).collect(Collectors.toList()));
+            newsResponse.setTotalResults(articles.size());
+            return articles;
+        }
+        else{
+            return new ArrayList<>();
+        }
     }
+
+
 
 
 
