@@ -25,6 +25,10 @@ public class Article {
         this.content = content;
     }
 
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     //returns a new author variable
     public String getAuthor() {
         return author;
