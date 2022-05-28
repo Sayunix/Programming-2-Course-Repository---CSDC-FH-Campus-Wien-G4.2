@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class AppController {
@@ -67,12 +68,20 @@ public class AppController {
 
         }
     }
-
+    //Group articles with the same source name and counts how many times those are in the list
+    //sets a map and assigns values to the map
+    //adds a stream to the map and searches for the max value of a element(the name that is used the most)
+    //gives the key(location) of most common element and returns that element
     public String printMostSource(){
         if (!articles.isEmpty()){
-            return  articles.stream()
-                    .max(Comparator.comparing(article -> article.getSource().getName()))
-                    .get().getSource().getName();
+            return articles.stream()
+                    //Quelle:https://stackoverflow.com/questions/22989806/find-the-most-common-string-in-arraylist User:ChandraBhan Singh
+                    .collect(Collectors.groupingBy(article -> article.getSource().getName(), Collectors.counting()))
+                    .entrySet()
+                    .stream()
+                    .max(Map.Entry.comparingByValue())
+                    .get()
+                    .getKey();
         }else{
             return "No Articles in the List!";
         }
