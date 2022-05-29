@@ -15,7 +15,7 @@ public class NewsApi {
 
     private String URL = "https://newsapi.org/v2/";
     private String apiKey = "?apiKey=092d58d1782045b4b3f8e1d3281e4296";
-    private final OkHttpClient client;
+    OkHttpClient client = new OkHttpClient();
 
     private static String q;
     private static String endpoint;
