@@ -26,4 +26,6 @@ public class NewsResponse {
         return articles;
     }
 
+
+
 }
