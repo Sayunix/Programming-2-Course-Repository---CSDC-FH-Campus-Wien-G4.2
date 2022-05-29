@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 public class App extends Application{
 
     @Override
@@ -18,7 +19,7 @@ public class App extends Application{
         primaryStage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NewsApiException {
         launch(args);
         //Menu menu = new Menu();
         //menu.start();
