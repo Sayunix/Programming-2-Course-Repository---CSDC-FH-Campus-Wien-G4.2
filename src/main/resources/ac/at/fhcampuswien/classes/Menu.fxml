@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="643.0" prefWidth="1101.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ac.at.fhcampuswien.classes.MenuController">
+<AnchorPane prefHeight="597.0" prefWidth="1142.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ac.at.fhcampuswien.classes.MenuController">
    <children>
       <Button fx:id="btn_ArticleCount" focusTraversable="false" layoutX="469.0" layoutY="546.0" mnemonicParsing="false" onAction="#click_Amount" prefHeight="38.0" prefWidth="199.0" text="Amount of articles" />
       <Button fx:id="btn_Exit" focusTraversable="false" layoutX="679.0" layoutY="546.0" mnemonicParsing="false" onAction="#click_Exit" prefHeight="38.0" prefWidth="199.0" text="Exit" />
@@ -50,6 +50,10 @@
             <ComboBox fx:id="cbx_language" layoutX="75.0" layoutY="11.0" prefWidth="150.0" promptText="All Languages" />
          </children>
       </Pane>
-      <Button fx:id="btn_amountNYTarticles" layoutX="55.0" layoutY="597.0" mnemonicParsing="false" onAction="#click_amountNYTarticle" text="Amount of NYT Articles" />
+      <Button fx:id="btn_amountNYTarticles" layoutX="1000.0" layoutY="50.0" mnemonicParsing="false" onAction="#click_amountNYTarticle" prefHeight="47.0" prefWidth="121.0" text="Amount of NYT Articles" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btn_longestAuthor" layoutX="1000.0" layoutY="107.0" mnemonicParsing="false" onAction="#click_longestAuthorname" prefHeight="47.0" prefWidth="121.0" text="Longest Authorname" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btn_printMostSource" layoutX="1000.0" layoutY="165.0" mnemonicParsing="false" onAction="#click_printMostSource" prefHeight="47.0" prefWidth="121.0" text="Print most source" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="btn_sortDesc" layoutX="1000.0" layoutY="285.0" mnemonicParsing="false" onAction="#click_sortDesc" prefHeight="47.0" prefWidth="121.0" text="sort Description by length" textAlignment="CENTER" wrapText="true" />
+      <ToggleButton fx:id="tgbtn_headlines" layoutX="1000.0" layoutY="225.0" mnemonicParsing="false" onAction="#click_headlinesUnder15" prefHeight="47.0" prefWidth="121.0" text="Headlines &lt; 15" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

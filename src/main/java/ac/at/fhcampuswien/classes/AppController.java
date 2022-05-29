@@ -33,26 +33,27 @@ public class AppController {
 
     //creates a URL for the Request and returns a List with the top headlines, which is Responsed from the API
     public List<Article> getTopHeadlines(String q, String selectCountry, String selectedCategory) throws IOException {
-        newsApi.setQ(q);
-        newsApi.setCountry(selectCountry);
-        newsApi.setEndpoint(endpoint.top_headlines.toString());
-        newsApi.setCategory(selectedCategory);
+            newsApi.setQ(q);
+            newsApi.setCountry(selectCountry);
+            newsApi.setEndpoint(endpoint.top_headlines.toString());
+            newsApi.setCategory(selectedCategory);
 
-        newsResponse = newsApi.deserializeArticle(newsApi.generateURL());
-        setArticles(newsResponse.getArticles());
+            newsResponse = newsApi.deserializeArticle(newsApi.generateURL());
+            setArticles(newsResponse.getArticles());
 
         return articles;
     }
 
     //creates a URL for the Request and returns a List with the Bitcoin-News, which is Responsed from the API
     public List<Article> getAllNewsBitcoin(String selectedLanguage, String selectedSortBy) throws IOException {
-        newsApi.setQ("bitcoin");
-        newsApi.setEndpoint(endpoint.everything.toString());
-        newsApi.setLanguage(selectedLanguage);
-        newsApi.setSortBy(selectedSortBy);
 
-        newsResponse = newsApi.deserializeArticle(newsApi.generateURL());
-        setArticles(newsResponse.getArticles());
+            newsApi.setQ("bitcoin");
+            newsApi.setEndpoint(endpoint.everything.toString());
+            newsApi.setLanguage(selectedLanguage);
+            newsApi.setSortBy(selectedSortBy);
+
+            newsResponse = newsApi.deserializeArticle(newsApi.generateURL());
+            setArticles(newsResponse.getArticles());
 
         return articles;
     }
@@ -65,7 +66,6 @@ public class AppController {
                             .count();
         }else{
             return "No Articles in the List!";
-
         }
     }
     //Group articles with the same source name and counts how many times those are in the list

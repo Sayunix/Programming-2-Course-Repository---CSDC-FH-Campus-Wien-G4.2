@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,11 +24,11 @@ public class MenuController implements Initializable {
     AppController controller = new AppController();
 
     @FXML
-    Button btn_Headlines, btn_Exit, btn_ArticleCount, btn_searchheadlines, btn_searchbitcoin, btn_Bitcoin, btn_amountNYTarticles;
+    Button btn_Headlines, btn_Exit, btn_ArticleCount, btn_searchheadlines, btn_searchbitcoin, btn_Bitcoin, btn_amountNYTarticles,
+            btn_printMostSource, btn_longestAuthor, btn_sortDesc;
 
     @FXML
     Label lbl_Information;
-
 
     @FXML
     TextField txf_search;
@@ -43,67 +45,77 @@ public class MenuController implements Initializable {
     @FXML
     Pane pn_headlines, pn_bitcoin;
 
-    public void click_search() throws IOException{
-        //"Reset" the amount of Article.
-        lbl_Information.setText("");
+    @FXML
+    ToggleButton tgbtn_headlines;
+
+    ObservableList<Article> tmp_ob;
+
+    public void click_search() {
+        try {
+            //"Reset" the amount of Article.
+            lbl_Information.setText("");
+
+            //We have 2 Panes. 1 for the Top-Headlines and 1 for the Bitcoin News. If the user clicks on the Top-Headlines-Button
+            //The Pane for the top-headlines will show up (will get visible) and vice-verse.
 
 
-        //We have 2 Panes. 1 for the Top-Headlines and 1 for the Bitcoin News. If the user clicks on the Top-Headlines-Button
-        //The Pane for the top-headlines will show up (will get visible) and vice-verse.
+            //If the Button Top-headlines is clicked this argument will be true
+            if (pn_headlines.isVisible()) {
+                //if no country is selected we will give them the value of "all countries"
+                if (cbx_country.getSelectionModel().isEmpty()) {
+                    cbx_country.setValue(country.all);
+                }
 
+                //if no category is selected we will give them the value of "general"
+                if (cbx_category.getSelectionModel().isEmpty()) {
+                    cbx_category.setValue(category.general);
+                }
 
-        //If the Button Top-headlines is clicked this argument will be true
-        if (pn_headlines.isVisible()) {
-            //if no country is selected we will give them the value of "all countries"
-            if (cbx_country.getSelectionModel().isEmpty()) {
-                cbx_country.setValue(country.all);
+                //create a Variable from Enum with the Selected item in it.
+                country selectedcountry = (country) cbx_country.getSelectionModel().getSelectedItem();
+                category selectedcategory = (category) cbx_category.getSelectionModel().getSelectedItem();
+
+                //To add "Objects" in the TableView we need to create a ObservableList. The input will be the deserialized NewsApi Input.
+                ObservableList<Article> ob = FXCollections.observableArrayList(controller.getTopHeadlines(txf_search.getText(), selectedcountry.name(), selectedcategory.name()));
+                tbv_News.setItems(ob);
+                tmp_ob = ob;
+            } else {
+                if (cbx_language.getSelectionModel().isEmpty()) {
+                    cbx_language.setValue(language.all);
+                }
+
+                if (cbx_sortby.getSelectionModel().isEmpty()) {
+                    cbx_sortby.setValue(sortBy.publishedAt);
+                }
+
+                language selectedlanguage = (language) cbx_language.getSelectionModel().getSelectedItem();
+                sortBy selectedsortby = (sortBy) cbx_sortby.getSelectionModel().getSelectedItem();
+
+                ObservableList<Article> ob = FXCollections.observableArrayList(controller.getAllNewsBitcoin(selectedlanguage.name(), selectedsortby.name()));
+                tbv_News.setItems(ob);
+                tmp_ob = ob;
             }
-
-            //if no category is selected we will give them the value of "general"
-            if (cbx_category.getSelectionModel().isEmpty()) {
-                cbx_category.setValue(category.general);
-            }
-
-            //create a Variable from Enum with the Selected item in it.
-            country selectedcountry = (country) cbx_country.getSelectionModel().getSelectedItem();
-            category selectedcategory = (category) cbx_category.getSelectionModel().getSelectedItem();
-
-            //To add "Objects" in the TableView we need to create a ObservableList. The input will be the deserialized NewsApi Input.
-            ObservableList<Article> ob = FXCollections.observableArrayList(controller.getTopHeadlines(txf_search.getText(), selectedcountry.name(), selectedcategory.name()));
-            tbv_News.setItems(ob);
-
-        }else{
-            if (cbx_language.getSelectionModel().isEmpty()) {
-                cbx_language.setValue(language.all);
-            }
-
-            if (cbx_sortby.getSelectionModel().isEmpty()) {
-                cbx_sortby.setValue(sortBy.publishedAt);
-            }
-
-            language selectedlanguage = (language) cbx_language.getSelectionModel().getSelectedItem();
-            sortBy selectedsortby = (sortBy) cbx_sortby.getSelectionModel().getSelectedItem();
-
-            ObservableList<Article> ob = FXCollections.observableArrayList(controller.getAllNewsBitcoin(selectedlanguage.name(), selectedsortby.name()));
-            tbv_News.setItems(ob);
+            tgbtn_headlines.setSelected(false);
+        }
+        catch (IOException e){
+            lbl_Information.setText(e.getMessage());
         }
     }
 
     //makes the pane for top-headlines visible and the pane for bitcoin invisible
-    public void click_Headline() throws IOException {
+    public void click_Headline(){
         pn_bitcoin.setVisible(false);
         pn_headlines.setVisible(true);
     }
 
     //makes the pane for bitcoin visible and the pane for top-headlines invisible
-    public void click_Bitcoin() throws IOException {
+    public void click_Bitcoin(){
         pn_headlines.setVisible(false);
         pn_bitcoin.setVisible(true);
     }
 
     //shows the amount of articles
     public void click_Amount(){
-        lbl_Information.setText("");
         lbl_Information.setText("Amount of Articles: " + controller.getArticleCount());
     }
 
@@ -113,8 +125,35 @@ public class MenuController implements Initializable {
     }
 
     public void click_amountNYTarticle(){
-        lbl_Information.setText("");
-        lbl_Information.setText(""+controller.printAmountNYTArticles());
+        lbl_Information.setText("Amount of NYT Articles: "+controller.printAmountNYTArticles());
+    }
+
+    public void click_printMostSource(){
+        lbl_Information.setText("Name of the most used source: "+controller.printMostSource());
+    }
+
+    public void click_longestAuthorname(){
+        lbl_Information.setText("Longest Author Name: "+controller.printLongestAuthorName());
+    }
+
+    public void click_headlinesUnder15(){
+
+        if (tgbtn_headlines.isSelected()) {
+            ObservableList<Article> ob = FXCollections.observableArrayList(controller.printHeadlinesUnder15());
+            tbv_News.setItems(ob);
+        }else{
+            if (tmp_ob != null) {
+                tbv_News.setItems(tmp_ob);
+            }
+            else {
+                lbl_Information.setText("Nothing was searched before!");
+            }
+        }
+    }
+
+    public void click_sortDesc(){
+        ObservableList<Article> ob = FXCollections.observableArrayList(controller.longestDescription());
+        tbv_News.setItems(ob);
     }
 
 

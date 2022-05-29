@@ -6,12 +6,13 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 public class NewsApi {
     NewsResponse newsResponse = new NewsResponse();
 
     private String URL = "https://newsapi.org/v2/";
-    private String apiKey = "?apiKey=092d58d1782045b4b3f8e1d3281e4296";
+    private String apiKey = "?apiKey=5010f35b2673443ca4dd94c9064d03d2";
 
     private static String q;
     private static String endpoint;
@@ -19,6 +20,11 @@ public class NewsApi {
     private static String category;
     private static String language;
     private static String sortBy;
+
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
 
     //sets the value for our query
     public void setQ(String q) {
@@ -112,10 +118,8 @@ public class NewsApi {
     //calls the run method with a string url as parametric and converts the response from the newsapi
     // from json into a java object using gson
     public NewsResponse deserializeArticle(String url) throws IOException {
-        Gson gson = new Gson();
-
-        newsResponse = gson.fromJson(run(url), NewsResponse.class);
-
-        return newsResponse;
+            Gson gson = new Gson();
+            newsResponse = gson.fromJson(run(url), NewsResponse.class);
+            return newsResponse;
     }
 }
