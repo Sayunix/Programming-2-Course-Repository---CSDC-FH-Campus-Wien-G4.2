@@ -16,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -34,13 +33,13 @@ public class MenuController implements Initializable {
     TextField txf_search;
 
     @FXML
-    ComboBox cbx_country,cbx_category,cbx_language, cbx_sortby;
+    ComboBox cbx_country, cbx_category, cbx_language, cbx_sortby;
 
     @FXML
     TableView<Article> tbv_News;
 
     @FXML
-    TableColumn<Article,String> tbc_author,tbc_title, tbc_description,tbc_url, tbc_urlimage, tbc_published, tbc_content;
+    TableColumn<Article, String> tbc_author, tbc_title, tbc_description, tbc_url, tbc_urlimage, tbc_published, tbc_content;
 
     @FXML
     Pane pn_headlines, pn_bitcoin;
@@ -48,7 +47,7 @@ public class MenuController implements Initializable {
     @FXML
     ToggleButton tgbtn_headlines;
 
-    ObservableList<Article> tmp_ob;
+    ObservableList<Article> tmp_ob, ob = null;
 
     public void click_search() {
         try {
@@ -76,7 +75,7 @@ public class MenuController implements Initializable {
                 category selectedcategory = (category) cbx_category.getSelectionModel().getSelectedItem();
 
                 //To add "Objects" in the TableView we need to create a ObservableList. The input will be the deserialized NewsApi Input.
-                ObservableList<Article> ob = FXCollections.observableArrayList(controller.getTopHeadlines(txf_search.getText(), selectedcountry.name(), selectedcategory.name()));
+                ob = FXCollections.observableArrayList(controller.getTopHeadlines(txf_search.getText(), selectedcountry.name(), selectedcategory.name()));
                 tbv_News.setItems(ob);
                 tmp_ob = ob;
             } else {
@@ -91,69 +90,78 @@ public class MenuController implements Initializable {
                 language selectedlanguage = (language) cbx_language.getSelectionModel().getSelectedItem();
                 sortBy selectedsortby = (sortBy) cbx_sortby.getSelectionModel().getSelectedItem();
 
-                ObservableList<Article> ob = FXCollections.observableArrayList(controller.getAllNewsBitcoin(selectedlanguage.name(), selectedsortby.name()));
+                ob = FXCollections.observableArrayList(controller.getAllNewsBitcoin(selectedlanguage.name(), selectedsortby.name()));
                 tbv_News.setItems(ob);
                 tmp_ob = ob;
             }
             tgbtn_headlines.setSelected(false);
-        }
-        catch (IOException e){
+        } catch (NewsAPIException e) {
+            lbl_Information.setText(e.getMessage());
+        } catch (NoInternetException e) {
             lbl_Information.setText(e.getMessage());
         }
     }
 
     //makes the pane for top-headlines visible and the pane for bitcoin invisible
-    public void click_Headline(){
+    public void click_Headline() {
         pn_bitcoin.setVisible(false);
         pn_headlines.setVisible(true);
     }
 
     //makes the pane for bitcoin visible and the pane for top-headlines invisible
-    public void click_Bitcoin(){
+    public void click_Bitcoin() {
         pn_headlines.setVisible(false);
         pn_bitcoin.setVisible(true);
     }
 
     //shows the amount of articles
-    public void click_Amount(){
-        lbl_Information.setText("Amount of Articles: " + controller.getArticleCount());
+    public void click_Amount() {
+        if (tgbtn_headlines.isSelected()) {
+            lbl_Information.setText("Amount of Articles: " + controller.getAmountArticlesUnder15());
+        } else {
+            lbl_Information.setText("Amount of Articles: " + controller.getArticleCount());
+        }
     }
 
     //Closes the Application
-    public void click_Exit(){
+    public void click_Exit() {
         System.exit(0);
     }
 
-    public void click_amountNYTarticle(){
-        lbl_Information.setText("Amount of NYT Articles: "+controller.printAmountNYTArticles());
+    public void click_amountNYTarticle() {
+        lbl_Information.setText("Amount of NYT Articles: " + controller.printAmountNYTArticles());
     }
 
-    public void click_printMostSource(){
-        lbl_Information.setText("Name of the most used source: "+controller.printMostSource());
+    public void click_printMostSource() {
+        lbl_Information.setText("Name of the most used source: " + controller.printMostSource());
     }
 
-    public void click_longestAuthorname(){
-        lbl_Information.setText("Longest Author Name: "+controller.printLongestAuthorName());
+    public void click_longestAuthorname() {
+        lbl_Information.setText("Longest Author Name: " + controller.printLongestAuthorName());
     }
 
-    public void click_headlinesUnder15(){
-
+    public void click_headlinesUnder15() {
+        lbl_Information.setText("");
         if (tgbtn_headlines.isSelected()) {
-            ObservableList<Article> ob = FXCollections.observableArrayList(controller.printHeadlinesUnder15());
+            ob = FXCollections.observableArrayList(controller.printHeadlinesUnder15());
             tbv_News.setItems(ob);
-        }else{
+        } else {
             if (tmp_ob != null) {
+                controller.setArticles(tmp_ob);
                 tbv_News.setItems(tmp_ob);
-            }
-            else {
+            } else {
                 lbl_Information.setText("Nothing was searched before!");
             }
         }
     }
 
-    public void click_sortDesc(){
-        ObservableList<Article> ob = FXCollections.observableArrayList(controller.longestDescription());
-        tbv_News.setItems(ob);
+    public void click_sortDesc() {
+        ob = FXCollections.observableArrayList(controller.longestDescription());
+        if (!ob.isEmpty()) {
+            tbv_News.setItems(ob);
+        } else {
+            lbl_Information.setText("Shortest Description first: No Articles in the List!");
+        }
     }
 
 
