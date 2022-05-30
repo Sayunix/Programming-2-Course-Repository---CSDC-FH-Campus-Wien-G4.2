@@ -12,7 +12,6 @@ public class Article {
     private String content;
     private Source source;
 
-
     //creates an author and a title for the article class
     public Article(Source source, String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
         this.source = source;
