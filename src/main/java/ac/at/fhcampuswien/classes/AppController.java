@@ -14,6 +14,8 @@ public class AppController {
     NewsResponse newsResponse = new NewsResponse();
     Source source = new Source();
 
+    private int counter=0;
+
     private List<Article> articles;
 
     //The constructor greats a new List
@@ -28,33 +30,49 @@ public class AppController {
 
     //returns the amount of the Articles, which is taken from an attribute from NewsResponse
     public int getArticleCount() {
-        return newsResponse.getTotalResults();
+        //return newsResponse.getTotalResults();
+        return this.articles.size();
     }
 
     //creates a URL for the Request and returns a List with the top headlines, which is Responsed from the API
-    public List<Article> getTopHeadlines(String q, String selectCountry, String selectedCategory) throws IOException {
-            newsApi.setQ(q);
-            newsApi.setCountry(selectCountry);
-            newsApi.setEndpoint(endpoint.top_headlines.toString());
-            newsApi.setCategory(selectedCategory);
+    public List<Article> getTopHeadlines(String q, String selectCountry, String selectedCategory) throws NoInternetException, NewsAPIException {
+        newsApi.setQ(q);
+        newsApi.setCountry(selectCountry);
+        newsApi.setEndpoint(endpoint.top_headlines.toString());
+        newsApi.setCategory(selectedCategory);
 
-            newsResponse = newsApi.deserializeArticle(newsApi.generateURL());
-            setArticles(newsResponse.getArticles());
-
+        newsResponse = newsApi.deserializeArticle(newsApi.generateURL());
+        if (newsResponse.getStatus().equals("error")) {
+            newsApi.setApiKey("?apiKey=743488a1ac334f79a8e70e2267d25e21");
+            if (counter == 1){
+                throw new NewsAPIException();
+            }
+            counter++;
+            getTopHeadlines(q, selectCountry, selectedCategory);
+        }
+        counter = 0;
+        setArticles(newsResponse.getArticles());
         return articles;
     }
 
     //creates a URL for the Request and returns a List with the Bitcoin-News, which is Responsed from the API
-    public List<Article> getAllNewsBitcoin(String selectedLanguage, String selectedSortBy) throws IOException {
+    public List<Article> getAllNewsBitcoin(String selectedLanguage, String selectedSortBy) throws NoInternetException {
+        newsApi.setQ("bitcoin");
+        newsApi.setEndpoint(endpoint.everything.toString());
+        newsApi.setLanguage(selectedLanguage);
+        newsApi.setSortBy(selectedSortBy);
 
-            newsApi.setQ("bitcoin");
-            newsApi.setEndpoint(endpoint.everything.toString());
-            newsApi.setLanguage(selectedLanguage);
-            newsApi.setSortBy(selectedSortBy);
-
-            newsResponse = newsApi.deserializeArticle(newsApi.generateURL());
-            setArticles(newsResponse.getArticles());
-
+        newsResponse = newsApi.deserializeArticle(newsApi.generateURL());
+        if (newsResponse.getStatus().equals("error")) {
+            newsApi.setApiKey("?apiKey=743488a1ac334f79a8e70e2267d25e21");
+            if (counter == 1){
+                throw new NewsAPIException();
+            }
+            counter++;
+            getAllNewsBitcoin(selectedLanguage, selectedSortBy);
+        }
+        counter = 0;
+        setArticles(newsResponse.getArticles());
         return articles;
     }
 

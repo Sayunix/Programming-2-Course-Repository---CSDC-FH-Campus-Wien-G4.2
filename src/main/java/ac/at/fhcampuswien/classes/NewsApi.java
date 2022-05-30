@@ -104,22 +104,25 @@ public class NewsApi {
 
     // takes a url as and sends a request to the api using that link and processes the response from the api
     // to a string
-    public String run(String url) throws IOException{
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
+    public String run(String url) throws NoInternetException {
+        try {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
 
-        try (Response response = client.newCall(request).execute()) {
+            Response response = client.newCall(request).execute();
             return response.body().string();
+        } catch (IOException e) {
+            throw new NoInternetException();
         }
     }
 
     //calls the run method with a string url as parametric and converts the response from the newsapi
     // from json into a java object using gson
-    public NewsResponse deserializeArticle(String url) throws IOException {
-            Gson gson = new Gson();
-            newsResponse = gson.fromJson(run(url), NewsResponse.class);
-            return newsResponse;
+    public NewsResponse deserializeArticle(String url) throws NoInternetException {
+        Gson gson = new Gson();
+        newsResponse = gson.fromJson(run(url), NewsResponse.class);
+        return newsResponse;
     }
 }

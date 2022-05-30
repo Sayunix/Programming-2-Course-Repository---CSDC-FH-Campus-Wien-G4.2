@@ -48,9 +48,9 @@ public class MenuController implements Initializable {
     @FXML
     ToggleButton tgbtn_headlines;
 
-    ObservableList<Article> tmp_ob;
+    ObservableList<Article> tmp_ob, ob=null;
 
-    public void click_search() {
+    public void click_search(){
         try {
             //"Reset" the amount of Article.
             lbl_Information.setText("");
@@ -76,10 +76,11 @@ public class MenuController implements Initializable {
                 category selectedcategory = (category) cbx_category.getSelectionModel().getSelectedItem();
 
                 //To add "Objects" in the TableView we need to create a ObservableList. The input will be the deserialized NewsApi Input.
-                ObservableList<Article> ob = FXCollections.observableArrayList(controller.getTopHeadlines(txf_search.getText(), selectedcountry.name(), selectedcategory.name()));
+                ob = FXCollections.observableArrayList(controller.getTopHeadlines(txf_search.getText(), selectedcountry.name(), selectedcategory.name()));
                 tbv_News.setItems(ob);
                 tmp_ob = ob;
-            } else {
+            }
+            else {
                 if (cbx_language.getSelectionModel().isEmpty()) {
                     cbx_language.setValue(language.all);
                 }
@@ -91,13 +92,14 @@ public class MenuController implements Initializable {
                 language selectedlanguage = (language) cbx_language.getSelectionModel().getSelectedItem();
                 sortBy selectedsortby = (sortBy) cbx_sortby.getSelectionModel().getSelectedItem();
 
-                ObservableList<Article> ob = FXCollections.observableArrayList(controller.getAllNewsBitcoin(selectedlanguage.name(), selectedsortby.name()));
+                ob = FXCollections.observableArrayList(controller.getAllNewsBitcoin(selectedlanguage.name(), selectedsortby.name()));
                 tbv_News.setItems(ob);
                 tmp_ob = ob;
             }
             tgbtn_headlines.setSelected(false);
-        }
-        catch (IOException e){
+        }catch (NewsAPIException e){
+            lbl_Information.setText(e.getMessage());
+        }catch (NoInternetException e) {
             lbl_Information.setText(e.getMessage());
         }
     }
@@ -136,24 +138,28 @@ public class MenuController implements Initializable {
         lbl_Information.setText("Longest Author Name: "+controller.printLongestAuthorName());
     }
 
-    public void click_headlinesUnder15(){
+    public void click_headlinesUnder15() {
 
         if (tgbtn_headlines.isSelected()) {
-            ObservableList<Article> ob = FXCollections.observableArrayList(controller.printHeadlinesUnder15());
+            ob = FXCollections.observableArrayList(controller.printHeadlinesUnder15());
             tbv_News.setItems(ob);
-        }else{
+        } else {
             if (tmp_ob != null) {
+                controller.setArticles(tmp_ob);
                 tbv_News.setItems(tmp_ob);
-            }
-            else {
+            } else {
                 lbl_Information.setText("Nothing was searched before!");
             }
         }
     }
 
-    public void click_sortDesc(){
-        ObservableList<Article> ob = FXCollections.observableArrayList(controller.longestDescription());
-        tbv_News.setItems(ob);
+    public void click_sortDesc() {
+        ob = FXCollections.observableArrayList(controller.longestDescription());
+        if (!ob.isEmpty()) {
+            tbv_News.setItems(ob);
+        } else{
+            lbl_Information.setText("Shortest Description first: No Articles in the List!");
+        }
     }
 
 
