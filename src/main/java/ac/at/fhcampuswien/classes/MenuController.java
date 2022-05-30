@@ -117,8 +117,12 @@ public class MenuController implements Initializable {
     }
 
     //shows the amount of articles
-    public void click_Amount(){
-        lbl_Information.setText("Amount of Articles: " + controller.getArticleCount());
+    public void click_Amount() {
+        if (tgbtn_headlines.isSelected()) {
+            lbl_Information.setText("Amount of Articles: " + controller.getAmountArticlesUnder15());
+        } else {
+            lbl_Information.setText("Amount of Articles: " + controller.getArticleCount());
+        }
     }
 
     //Closes the Application
@@ -139,7 +143,7 @@ public class MenuController implements Initializable {
     }
 
     public void click_headlinesUnder15() {
-
+        lbl_Information.setText("");
         if (tgbtn_headlines.isSelected()) {
             ob = FXCollections.observableArrayList(controller.printHeadlinesUnder15());
             tbv_News.setItems(ob);
