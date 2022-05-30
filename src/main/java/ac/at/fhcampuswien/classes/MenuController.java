@@ -4,6 +4,7 @@ import ac.at.fhcampuswien.enums.category;
 import ac.at.fhcampuswien.enums.country;
 import ac.at.fhcampuswien.enums.language;
 import ac.at.fhcampuswien.enums.sortBy;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 
+import javax.swing.event.ChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,13 +27,13 @@ public class MenuController implements Initializable {
 
     @FXML
     Button btn_Headlines, btn_Exit, btn_ArticleCount, btn_searchheadlines, btn_searchbitcoin, btn_Bitcoin, btn_amountNYTarticles,
-            btn_printMostSource, btn_longestAuthor, btn_sortDesc;
+            btn_printMostSource, btn_longestAuthor, btn_sortDesc, btn_download, btn_pnDownload;
 
     @FXML
     Label lbl_Information;
 
     @FXML
-    TextField txf_search;
+    TextField txf_search, txf_download;
 
     @FXML
     ComboBox cbx_country,cbx_category,cbx_language, cbx_sortby;
@@ -43,7 +45,7 @@ public class MenuController implements Initializable {
     TableColumn<Article,String> tbc_author,tbc_title, tbc_description,tbc_url, tbc_urlimage, tbc_published, tbc_content;
 
     @FXML
-    Pane pn_headlines, pn_bitcoin;
+    Pane pn_headlines, pn_bitcoin, pn_download;
 
     @FXML
     ToggleButton tgbtn_headlines;
@@ -108,12 +110,14 @@ public class MenuController implements Initializable {
     public void click_Headline(){
         pn_bitcoin.setVisible(false);
         pn_headlines.setVisible(true);
+        pn_download.setVisible(false);
     }
 
     //makes the pane for bitcoin visible and the pane for top-headlines invisible
     public void click_Bitcoin(){
         pn_headlines.setVisible(false);
         pn_bitcoin.setVisible(true);
+        pn_download.setVisible(false);
     }
 
     //shows the amount of articles
@@ -165,6 +169,19 @@ public class MenuController implements Initializable {
             lbl_Information.setText("Shortest Description first: No Articles in the List!");
         }
     }
+
+
+
+    public void click_downloadArticle(){
+        pn_bitcoin.setVisible(false);
+        pn_headlines.setVisible(false);
+        pn_download.setVisible(true);
+    }
+
+    public void click_downloadInPane(){
+
+    }
+
 
 
     //Initialize will run as soon as the Program is started
