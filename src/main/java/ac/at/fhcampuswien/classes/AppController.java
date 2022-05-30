@@ -132,7 +132,7 @@ public class AppController {
         if (!articles.isEmpty()) {
             setArticles(articles.stream()
                     .filter(article -> article.getTitle()
-                            .length() < 75).collect(Collectors.toList()));
+                            .length() < 15).collect(Collectors.toList()));
             setAmountArticlesUnder15(articles.size());
             return articles;
         } else {
