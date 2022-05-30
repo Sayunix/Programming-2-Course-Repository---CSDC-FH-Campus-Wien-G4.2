@@ -123,6 +123,7 @@ public class MenuController implements Initializable {
         }
     }
 
+
     //Closes the Application
     public void click_Exit() {
         System.exit(0);
