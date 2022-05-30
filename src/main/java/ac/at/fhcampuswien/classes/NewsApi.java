@@ -129,7 +129,7 @@ public class NewsApi {
     }
 
     //calls the run method with a string url as parametric and converts the response from the newsapi
-    // from json into a java object using gson
+    //from json into a java object using gson
     public NewsResponse deserializeArticle(String url) throws NoInternetException {
         Gson gson = new Gson();
         newsResponse = gson.fromJson(run(url), NewsResponse.class);

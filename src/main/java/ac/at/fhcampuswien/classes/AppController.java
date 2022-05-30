@@ -140,7 +140,6 @@ public class AppController {
         }
     }
 
-
     //changes the description of every article that does not have a description to ""
     //then sorts articles by the length of their description
     //if length of the descriptions are same, filters by descriptions alphabetically
