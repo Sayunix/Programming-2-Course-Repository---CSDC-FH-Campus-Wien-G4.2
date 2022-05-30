@@ -121,6 +121,7 @@ public class MenuController implements Initializable {
         lbl_Information.setText("Amount of Articles: " + controller.getArticleCount());
     }
 
+
     //Closes the Application
     public void click_Exit(){
         System.exit(0);
