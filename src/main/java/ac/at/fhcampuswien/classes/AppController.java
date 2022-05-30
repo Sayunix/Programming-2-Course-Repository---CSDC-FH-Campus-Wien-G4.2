@@ -2,10 +2,12 @@ package ac.at.fhcampuswien.classes;
 
 import ac.at.fhcampuswien.enums.endpoint;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AppController {
@@ -159,6 +161,37 @@ public class AppController {
 
         } else {
             return new ArrayList<>();
+        }
+    }
+    public String saveText(int id) throws IOException {
+        if(!articles.isEmpty()){
+            File saveFile = new File("src/main/resources/"+"Article Nr_" + id + ".txt");
+            saveFile.createNewFile();
+            if (saveFile.exists())
+            {
+                URL saveURL = new URL(articles.get(id).getUrl());
+                HttpURLConnection conn = (HttpURLConnection)saveURL.openConnection();
+                conn.setRequestMethod("GET");
+                conn.connect();
+                if(conn.getResponseCode() == 200) {
+                    Scanner scan = new Scanner(saveURL.openStream());
+                    PrintWriter print = new PrintWriter(saveFile);
+                    while (scan.hasNext()) {
+                        String temp = scan.nextLine();
+                        print.println(temp);
+                    }
+                    print.close();
+                    return "Download successful! Check resource folder for content!";
+                }
+                return "Website cannot be found!";
+            }
+            else
+            {
+                return "File " + id + "does not exist!";
+            }
+        }
+        else{
+            return "No Articles in the List!";
         }
     }
 

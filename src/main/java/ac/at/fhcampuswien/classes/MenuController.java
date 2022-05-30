@@ -179,7 +179,20 @@ public class MenuController implements Initializable {
     }
 
     public void click_downloadInPane(){
-
+        try{
+            Integer.parseInt(txf_download.getText());
+            int input = Integer.parseInt(txf_download.getText());
+            if(input >= 0 && input <= 21){
+                try {
+                    lbl_Information.setText(controller.saveText(input));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        catch(Exception e ){
+            lbl_Information.setText("Please enter the id of an article (numbers between 0 - 20)!");
+        }
     }
 
 
