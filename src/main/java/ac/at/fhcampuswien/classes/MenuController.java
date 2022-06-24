@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import ac.at.fhcampuswien.downloader.ParallelDownloader;
+import ac.at.fhcampuswien.downloader.SequentialDownloader;
 
 
 import java.io.IOException;
@@ -165,6 +167,22 @@ public class MenuController implements Initializable {
             tbv_News.setItems(ob);
         } else{
             lbl_Information.setText("Shortest Description first: No Articles in the List!");
+        }
+    }
+
+    //exercise 4 -> new
+    private void downloadURLs(){
+        try {
+            int resultSequential = controller.downloadURLs(new SequentialDownloader());
+            // TODO print time in ms it took to download URLs sequentially
+
+            // TODO implement the process() function in ParallelDownloader class
+            int resultParallel = controller.downloadURLs(new ParallelDownloader());
+
+            // TODO print time in ms it took to download URLs parallel
+
+        } catch (NewsAPIException e){
+            System.out.println(e.getMessage());
         }
     }
 

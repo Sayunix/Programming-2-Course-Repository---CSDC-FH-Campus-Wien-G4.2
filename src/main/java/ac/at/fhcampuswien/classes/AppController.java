@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
+import ac.at.fhcampuswien.downloader.Downloader;
 
 public class AppController {
     NewsApi newsApi = new NewsApi();
@@ -194,6 +195,19 @@ public class AppController {
         }
     }
 
+
+    // Method is needed for exercise 4 - ignore for exercise 3 solution
+    // returns number of downloaded article urls
+    public int downloadURLs(Downloader downloader) throws NewsAPIException{
+        if( articles == null)
+            throw new NewsAPIException();
+
+        List<String> urls = new ArrayList<>();
+
+        // TODO extract urls from articles with java stream
+
+        return downloader.process(urls);
+    }
 
     /**  //returns a List for a specified Word in the News
      protected List<Article> filterList(String query, List<Article> articles) {
