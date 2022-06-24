@@ -7,15 +7,11 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
-import java.net.UnknownHostException;
-import com.google.gson.JsonSyntaxException;
-import java.util.Objects;
-
 public class NewsApi {
     NewsResponse newsResponse = new NewsResponse();
 
     private String URL = "https://newsapi.org/v2/";
-    private String apiKey = "?apiKey=092d58d1782045b4b3f8e1d3281e4296";
+    private String apiKey = "?apiKey=5010f35b2673443ca4dd94c9064d03d2";
 
     private static String q;
     private static String endpoint;
@@ -24,8 +20,9 @@ public class NewsApi {
     private static String language;
     private static String sortBy;
 
-    private static final OkHttpClient client = new OkHttpClient();
-    private static final Gson gson = new Gson();
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
 
     //sets the value for our query
     public void setQ(String q) {
@@ -87,7 +84,7 @@ public class NewsApi {
         return "&sortBy=" + sortBy;
     }
 
-    //generates an url but checks first if the endpoint we need is "top-headlines" because different endpoints need
+    //generates a url but checks first if the endpoint we need is "top-headlines" because different endpoints need
     //different values in the url
     //then it generates a link with the needed values and returns that url as a String
     //after the url is generated all values are reset
@@ -117,50 +114,25 @@ public class NewsApi {
 
     // takes a url as and sends a request to the api using that link and processes the response from the api
     // to a string
-    public String run(String url) throws IOException {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
+    public String run(String url) throws NoInternetException {
+        try {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
 
-        try (Response response = client.newCall(request).execute()) {
+            Response response = client.newCall(request).execute();
             return response.body().string();
+        } catch (IOException e) {
+            throw new NoInternetException();
         }
     }
 
     //calls the run method with a string url as parametric and converts the response from the newsapi
-    // from json into a java object using gson
-    public NewsResponse deserializeArticle(String url) throws IOException {
+    //from json into a java object using gson
+    public NewsResponse deserializeArticle(String url) throws NoInternetException {
         Gson gson = new Gson();
-
         newsResponse = gson.fromJson(run(url), NewsResponse.class);
-
         return newsResponse;
     }
-
-        //catches user error and outprints a fitting response (errorMsg) -- sout output in GUI not console!
-        private static NewsResponse request (String url){
-            try {
-                Request request = new Request.Builder().url(url).build();
-                Response response = client.newCall(request).execute();
-                String json = Objects.requireNonNull(response.body()).string();
-                return gson.fromJson(json, NewsResponse.class);
-            } catch (UnknownHostException e) {
-                client.dispatcher().executorService().shutdown();
-                System.out.println("Unknown host connection");
-                return null;
-            }  catch (JsonSyntaxException e) {
-                System.out.println("Json syntax is incorrect");
-                return null;
-            } catch (IllegalStateException e) {
-                System.out.println("Json statement is incorrect");
-                return null;
-            } catch (IOException e) {
-                System.out.println("Unknown error");
-                return null;
-            } catch (IllegalArgumentException e) {
-                System.out.println("URL is incorrect");
-                return null;
-            }
-        }
-    }
+}
