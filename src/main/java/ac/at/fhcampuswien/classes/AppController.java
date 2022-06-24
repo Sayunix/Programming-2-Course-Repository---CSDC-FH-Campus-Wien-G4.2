@@ -12,8 +12,7 @@ import java.util.stream.Collectors;
 
 public class AppController {
     NewsApi newsApi = new NewsApi();
-    NewsResponse newsResponse = new NewsResponse();
-    Source source = new Source();
+    NewsResponse newsResponse = NewsResponse.getInstance();
 
     private int counter = 0;
     private List<Article> articles;

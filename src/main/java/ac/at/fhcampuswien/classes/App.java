@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class App extends Application{
@@ -22,7 +21,17 @@ public class App extends Application{
 
     public static void main(String[] args) {
         launch(args);
-        //Menu menu = new Menu();
-        //menu.start();
+
+        //For testing Builder
+        /*Article article = new Article.Builder(new Source("probe","ich"), "title")
+                .author("Safa")
+                .description("description")
+                .url("www")
+                .publishedAt("heute")
+                .content("was cooles")
+                .build();
+
+        System.out.println(article.toString());*/
+
     }
 }

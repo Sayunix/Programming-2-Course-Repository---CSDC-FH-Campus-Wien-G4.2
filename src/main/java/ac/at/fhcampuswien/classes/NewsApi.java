@@ -8,7 +8,7 @@ import okhttp3.Response;
 import java.io.IOException;
 
 public class NewsApi {
-    NewsResponse newsResponse = new NewsResponse();
+    NewsResponse newsResponse = NewsResponse.getInstance();
 
     private String URL = "https://newsapi.org/v2/";
     private String apiKey = "?apiKey=5010f35b2673443ca4dd94c9064d03d2";

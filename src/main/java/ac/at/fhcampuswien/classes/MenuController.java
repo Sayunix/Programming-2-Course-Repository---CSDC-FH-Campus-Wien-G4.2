@@ -4,7 +4,6 @@ import ac.at.fhcampuswien.enums.category;
 import ac.at.fhcampuswien.enums.country;
 import ac.at.fhcampuswien.enums.language;
 import ac.at.fhcampuswien.enums.sortBy;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 
-import javax.swing.event.ChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
