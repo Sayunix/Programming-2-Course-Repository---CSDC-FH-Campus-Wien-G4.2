@@ -176,14 +176,19 @@ public class MenuController implements Initializable {
             SequentialDownloader sd = new SequentialDownloader();
             ParallelDownloader pd = new ParallelDownloader();
 
+            long startsd = System.currentTimeMillis();
             int resultSequential = controller.downloadURLs(sd);
+            long endsd = System.currentTimeMillis();
             // TODO print time in ms it took to download URLs sequentially
 
             // TODO implement the process() function in ParallelDownloader class
+            long startpd = System.currentTimeMillis();
             int resultParallel = controller.downloadURLs(pd);
+            long endpd = System.currentTimeMillis();
 
             // TODO print time in ms it took to download URLs parallel
-            lbl_Information.setText("success");
+            lbl_Information.setText("It takes " + (endsd-startsd) + " milliseconds for " + resultSequential + " Articles in Sequential!\n" +
+                    "It takes " + (endpd-startpd) + " milliseconds for " + resultParallel + " Articles in Parallel!");
 
         } catch (NewsAPIException e){
             System.out.println(e.getMessage());
