@@ -9,7 +9,7 @@ public class NewsAPIException extends RuntimeException{
 
 package ac.at.fhcampuswien.classes;
 
-public class NewsAPIException extends RuntimeException{
+public class NewsAPIException extends Exception{
     public NewsAPIException() {
         super();
     }

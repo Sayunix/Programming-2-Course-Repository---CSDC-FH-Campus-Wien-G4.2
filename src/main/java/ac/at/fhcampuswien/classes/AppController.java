@@ -199,12 +199,15 @@ public class AppController {
     // Method is needed for exercise 4 - ignore for exercise 3 solution
     // returns number of downloaded article urls
     public int downloadURLs(Downloader downloader) throws NewsAPIException{
-        if( articles == null)
+        //TODO extract urls from articles with java stream
+
+        if (articles == null)
             throw new NewsAPIException();
 
-        List<String> urls = new ArrayList<>();
-
-        // TODO extract urls from articles with java stream
+        List<String> urls = articles.stream()
+                .map(Article::getUrl)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
         return downloader.process(urls);
     }
