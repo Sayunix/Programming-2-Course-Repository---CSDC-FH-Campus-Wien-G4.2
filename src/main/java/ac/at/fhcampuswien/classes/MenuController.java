@@ -172,9 +172,10 @@ public class MenuController implements Initializable {
 
     //exercise 4 -> new
     public void downloadURLs(){
+        lbl_Information.setText("");
         try {
-            SequentialDownloader sd = new SequentialDownloader();
-            ParallelDownloader pd = new ParallelDownloader();
+            SequentialDownloader sd = SequentialDownloader.getInstance();
+            ParallelDownloader pd = ParallelDownloader.getInstance();
 
             long startsd = System.currentTimeMillis();
             int resultSequential = controller.downloadURLs(sd);

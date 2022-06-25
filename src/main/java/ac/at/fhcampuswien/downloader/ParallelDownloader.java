@@ -1,6 +1,7 @@
 package ac.at.fhcampuswien.downloader;
 
 import ac.at.fhcampuswien.classes.NewsAPIException;
+import ac.at.fhcampuswien.classes.NewsResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,16 @@ import java.util.concurrent.*;
 
 // Class is needed for exercise 4 - ignore for exercise 3 solution
 public class ParallelDownloader extends Downloader {
+    private static ParallelDownloader _instance = null;
+
+    private ParallelDownloader(){};
+
+    public static ParallelDownloader getInstance(){
+        if (_instance == null){
+            _instance = new ParallelDownloader();
+        }
+        return _instance;
+    }
 
     // returns number of downloaded article urls
     @Override

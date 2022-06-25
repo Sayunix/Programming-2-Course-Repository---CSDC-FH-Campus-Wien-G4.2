@@ -2,11 +2,22 @@ package ac.at.fhcampuswien.downloader;
 
 
 import ac.at.fhcampuswien.classes.NewsAPIException;
+import ac.at.fhcampuswien.classes.NewsResponse;
 
 import java.util.List;
 
 // Class is needed for exercise 4 - ignore for exercise 3 solution
 public class SequentialDownloader extends Downloader {
+    private static SequentialDownloader _instance = null;
+
+    private SequentialDownloader(){};
+
+    public static SequentialDownloader getInstance(){
+        if (_instance == null){
+            _instance = new SequentialDownloader();
+        }
+        return _instance;
+    }
 
     // returns number of downloaded article urls
     @Override
