@@ -171,15 +171,19 @@ public class MenuController implements Initializable {
     }
 
     //exercise 4 -> new
-    private void downloadURLs(){
+    public void downloadURLs(){
         try {
-            int resultSequential = controller.downloadURLs(new SequentialDownloader());
+            SequentialDownloader sd = new SequentialDownloader();
+            ParallelDownloader pd = new ParallelDownloader();
+
+            int resultSequential = controller.downloadURLs(sd);
             // TODO print time in ms it took to download URLs sequentially
 
             // TODO implement the process() function in ParallelDownloader class
-            int resultParallel = controller.downloadURLs(new ParallelDownloader());
+            int resultParallel = controller.downloadURLs(pd);
 
             // TODO print time in ms it took to download URLs parallel
+            lbl_Information.setText("success");
 
         } catch (NewsAPIException e){
             System.out.println(e.getMessage());

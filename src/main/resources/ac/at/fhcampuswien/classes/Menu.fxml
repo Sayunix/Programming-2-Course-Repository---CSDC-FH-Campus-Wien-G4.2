@@ -63,5 +63,6 @@
             <Button fx:id="btn_pnDownload" layoutX="254.0" layoutY="11.0" mnemonicParsing="false" onAction="#click_downloadInPane" text="Download" />
          </children>
       </Pane>
+      <Button fx:id="btnDown" layoutX="1000.0" layoutY="478.0" mnemonicParsing="false" onAction="#downloadURLs" prefHeight="54.0" prefWidth="122.0" text="Download" />
    </children>
 </AnchorPane>
