@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 import ac.at.fhcampuswien.downloader.Downloader;
 
 public class AppController {
+    //singleton instance
+    private static AppController _instance = null;
     NewsApi newsApi = new NewsApi();
     NewsResponse newsResponse = NewsResponse.getInstance();
 
@@ -20,8 +22,16 @@ public class AppController {
     private int amountArticleUnder15;
 
     //The constructor greats a new List
-    public AppController() {
+    //constructor is private for singleton
+    private AppController() {
         articles = new ArrayList<Article>();
+    }
+    //if there already is an instance send that instance otherwise create instance
+    public static AppController getInstance(){
+        if (_instance == null){
+            _instance = new AppController();
+        }
+        return _instance;
     }
 
 
