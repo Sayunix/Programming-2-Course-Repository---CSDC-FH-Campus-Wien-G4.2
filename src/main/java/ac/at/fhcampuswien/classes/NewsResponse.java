@@ -3,7 +3,7 @@ package ac.at.fhcampuswien.classes;
 import java.util.List;
 
 public class NewsResponse {
-    //Singelton instance
+    //Singleton instance
     private static NewsResponse _instance = null;
 
     //gets the Results from the API

@@ -173,6 +173,7 @@ public class AppController {
             return new ArrayList<>();
         }
     }
+
     public String saveText(int id) throws IOException {
         if(!articles.isEmpty()){
             File saveFile = new File("src/main/resources/"+"Article Nr_" + id + ".txt");
